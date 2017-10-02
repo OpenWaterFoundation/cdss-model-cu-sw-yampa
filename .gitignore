@@ -1,0 +1,55 @@
+# Indicate which working files should be ignored and not committed to the repository
+
+# Ignore vi editor swap files
+
+*.swp
+*.swo
+
+# Ignore all log files
+
+*.log
+
+# Ignore Microsoft Office temporary files
+
+~$*
+
+# Ignore executable files, such as StateCU executables in "bin" folder
+
+*.exe
+
+################## Start StateCU Files #######################
+#
+# Ignore all input files that are dynamically created
+# - only save in the repository the source files used to generate model input files
+
+StateCU/*.cds
+StateCU/*.cli
+StateCU/*.ddh
+StateCU/*.fd
+StateCU/*.ipy
+StateCU/*.prc
+StateCU/*.str
+StateCU/*.tem
+
+# Ignore all StateCU binary and report output files
+# - these files are created by StateCU
+
+StateCU/season*.csv
+StateCU/*.BD1
+StateCU/*.cir
+StateCU/*.ddc
+StateCU/*.def
+StateCU/*.dwb
+StateCU/*.obc
+StateCU/*.sum
+StateCU/*.swb
+StateCU/*.wsl
+
+################## End StateCU Files #######################
+
+################## Start StateMod Files #######################
+# Ignore dynamic files written to StateMod folder
+
+StateMod/*.ipy
+
+################## End StateMod Files #######################

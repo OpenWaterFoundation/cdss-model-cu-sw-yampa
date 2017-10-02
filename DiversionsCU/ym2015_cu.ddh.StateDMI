@@ -1,0 +1,85 @@
+# ym2012_cu.ddh.StateDMI
+#
+# Lisa Wade @ Wilson Water Group
+# 4/8/2015
+#
+#
+# StateDMI command file to create the historical diversion file used in the consumptive use analysis
+#
+#  Step 1 - set time-series period and year type.  StateCU runs on calendar year.
+#
+SetOutputPeriod(OutputStart="01/1950",OutputEnd="12/2013")
+SetOutputYearType(OutputYearType=Calendar)
+#
+#  Step 2 - read structure list from structure file list
+#
+ReadDiversionStationsFromList(ListFile="..\LocationCU\ym15str.csv",IDCol=1)
+#
+#  Step 3 - read aggregate and diversion system structure assignments.  Note that
+#        we combine historical diversions for aggs and diversion systems, and
+#        multistructures are treated as diversion systems for StateCU.
+#        The "no diversion" aggregates are not pulled from Hydrobase
+#        because they do not have historical diversion data.
+#
+SetDiversionAggregateFromList(ListFile="..\DiversionsCU\ym_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+SetDiversionSystemFromList(ListFile="..\DiversionsCU\ym_divsys.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+SetDiversionSystemFromList(ListFile="..\DiversionsCU\ym_multistr.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+#
+#  Step 4 - read historical diversions from HydroBase. Note that want individual structures
+#           in aggregates and diversion systems to be filled first, then diversions combined.
+#
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="*",IncludeExplicit=True,IncludeCollections=False,UseDiversionComments=True)
+#
+#  Step 5 - read fill pattern file, and assign patterns to water districts
+#
+ReadPatternFile(InputFile="fill2015.pat")
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="55*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09260000",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="44*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09251000",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="56*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09251000",FillPatternOrder=1,FillAverageOrder=2)
+# Wyoming structures needed for StateMod, not included in StateCU
+# ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="WYD_010",IncludeExplicit=False,UseDiversionComments=True,PatternID="09260000",FillPatternOrder=1,FillAverageOrder=2)
+# ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="WYD_011",IncludeExplicit=False,UseDiversionComments=True,PatternID="09260000",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09239500",FillPatternOrder=1,FillAverageOrder=2)
+#
+#  Step 6 - set diversions from external time-series files
+#
+# Wyoming structures needed for StateMod, not included in StateCU
+# Wyoming's future ag. demand(2040), set to zero for historic.
+# SetDiversionHistoricalTSMonthlyConstant(ID="990538",Constant=0,SetEnd="10/2002")
+#
+# Stillwater ditch has some water used in the Yampa basin and some water is a transbasin diversion
+SetDiversionHistoricalTSMonthly(ID="5804685_D",TSID="5804685.DWR.DivTotal.Month~StateMod~Stillwater.stm")
+#
+# Wyoming structures needed for StateMod, not included in StateCU
+# Add additional Wyoming diversions for 2004 update -BEC
+# SetDiversionHistoricalTSMonthly(ID="990539",TSID="990539...MONTH~StateMod~990539his.stm")
+# SetDiversionHistoricalTSMonthly(ID="990540",TSID="990540...MONTH~StateMod~990540his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_001",TSID="WYD_001...MONTH~StateMod~WYD_001his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_002",TSID="WYD_002...MONTH~StateMod~WYD_002his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_003",TSID="WYD_003...MONTH~StateMod~WYD_003his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_004",TSID="WYD_004...MONTH~StateMod~WYD_004his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_005",TSID="WYD_005...MONTH~StateMod~WYD_005his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_006",TSID="WYD_006...MONTH~StateMod~WYD_006his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_007",TSID="WYD_007...MONTH~StateMod~WYD_007his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_009",TSID="WYD_009...MONTH~StateMod~WYD_009his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_010",TSID="WYD_010...MONTH~StateMod~WYD_010his.stm")
+# SetDiversionHistoricalTSMonthly(ID="WYD_011",TSID="WYD_011...MONTH~StateMod~WYD_011his.stm")
+#
+#  Step 7 - fill historical diversion using pattern approach
+#
+FillDiversionHistoricalTSMonthlyPattern(ID="55*",PatternID="09260000")
+FillDiversionHistoricalTSMonthlyPattern(ID="44*",PatternID="09251000")
+FillDiversionHistoricalTSMonthlyPattern(ID="56*",PatternID="09251000")
+# Wyoming structures needed for StateMod, not included in StateCU
+# FillDiversionHistoricalTSMonthlyPattern(ID="WYD_010",PatternID="09260000")
+# FillDiversionHistoricalTSMonthlyPattern(ID="WYD_011",PatternID="09260000")
+FillDiversionHistoricalTSMonthlyPattern(ID="*",PatternID="09239500")
+#
+#  Step 8 - Fill remaining missing with month average
+#
+FillDiversionHistoricalTSMonthlyAverage(ID="*")
+#
+#  Step 9 - sort structures and create historical diversion file
+#
+SortDiversionHistoricalTSMonthly(Order=Ascending)
+WriteDiversionHistoricalTSMonthlyToStateMod(OutputFile="..\StateCU\ym2015_cu.ddh")

@@ -1,0 +1,40 @@
+# Lisa Wade @ WWG
+# 4/7/2015
+#
+# ym2015.str.StateDMI
+# Creates structure file to include irrigated acreage from 2005 and 2010 acreage assessments
+# ym15str.csv includes list of all explicit and aggregate structures
+# Currently does not include any of the Wyoming structures or aggregates.
+#
+ReadCULocationsFromList(ListFile="ym15str.csv",IDCol=1,AWCCol=2)
+#
+# Fill missing AWC values with WD average
+FillCULocation(ID="44*",AWC=0.1391)
+FillCULocation(ID="54*",AWC=0.1259)
+FillCULocation(ID="55*",AWC=0.0788)
+FillCULocation(ID="56*",AWC=0.0788)
+FillCULocation(ID="57*",AWC=0.1389)
+FillCULocation(ID="58*",AWC=0.1295)
+# WY and 99 - Not used in StateCU. Will be used in StateMod
+# FillCULocation(ID="99*",AWC=0.1259)
+# FillCULocation(ID="WY*",AWC=0.1259)
+#
+# Set county and HUC for climate station assignment
+FillCULocationsFromHydroBase(ID="*",CULocType=Structure,Region1Type=County,Region2Type=HUC)
+#
+# Assign climate weights based on county and HUC.
+SetCULocationClimateStationWeightsFromList(ListFile="climwts.csv",StationIDCol=1,Region1Col=2,Region2Col=3,TempWtCol=4,PrecWtCol=5)
+#
+# Assign climate stations for aggregates.
+FillCULocationClimateStationWeights(ID="44*",Weights="USC00055446,1.0,.71,USC00053738,0,.290")
+FillCULocationClimateStationWeights(ID="54*",Weights="USC00480484,.84,.84,USC00055446,.16,.16")
+FillCULocationClimateStationWeights(ID="55*",Weights="USC00480484,.84,.84,USC00055446,.16,.16")
+FillCULocationClimateStationWeights(ID="56*",Weights="USC00480484,.84,.84,USC00055446,.16,.16")
+FillCULocationClimateStationWeights(ID="57*",Weights="USC00059265,.4,.32,USC00057936,.43,.43,USC00053867,.17,.17,USC00056797,0,.08")
+FillCULocationClimateStationWeights(ID="58*",Weights="USC00059265,.4,.32,USC00057936,.43,.43,USC00053867,.17,.17,USC00056797,0,.08")
+# WY and 99 - Not used in StateCU. Will be used in StateMod
+# FillCULocationClimateStationWeights(ID="WY*",Weights="USC00480484,.84,.84,USC00055446,.16,.16")
+# FillCULocationClimateStationWeights(ID="99*",Weights="USC00480484,.84,.84,USC00055446,.16,.16")
+#
+# Write out to StateCU folder
+WriteCULocationsToStateCU(OutputFile="..\StateCU\ym2015.str",WriteHow=OverwriteFile)

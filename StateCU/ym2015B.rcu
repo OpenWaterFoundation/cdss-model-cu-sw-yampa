@@ -1,0 +1,16 @@
+# ym2015B.rcu supports the StateMod ym2015B (Baseline) run 
+# StateCU response file containing filenames of Yampa River basin input files
+#
+#
+# Filename
+CUControl =                      ym2015B.ccu
+ClimateStation =                 COclim2015.cli
+MeanTemperature_Monthly =        COclim2015.tem
+Precipitation_Monthly =          COclim2015.prc
+FrostDate_Yearly =               COclim2015.fd
+CropCharacteristic =             cdss.cch
+Blaney-Criddle_CropCoefficient = cdss_wEA.kbc
+Structure =                      ym2015.str
+CropDistribution_Yearly =        ym2015B.cds
+#Diversion_Historic_Monthly =     ym2015_cu.ddh
+IrrigationParameter_Yearly =     ym2015B.ipy

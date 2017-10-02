@@ -1,0 +1,66 @@
+#
+# ym2015.ipy
+#
+# Lisa Wade @ Wilson Water Group
+# 4/8/2015
+#
+# StateDMI command file to create the Yampa basin 2015 IPY file for StateCU
+#
+# Step 1 - Set output period and read CU locations from structure file
+SetOutputPeriod(OutputStart="1908",OutputEnd="2013")
+ReadCULocationsFromStateCU(InputFile="..\StateCU\ym2015.str")
+# Step 2 - Read SW aggregates
+# For StateCU, treat multistructures as diversion systems
+SetDiversionSystemFromList(ListFile="..\DiversionsCU\ym_divsys.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+SetDiversionSystemFromList(ListFile="..\DiversionsCU\ym_multistr.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+SetDiversionAggregateFromList(ListFile="..\DiversionsCU\ym_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+SetDiversionAggregateFromList(ListFile="..\DiversionsCU\ym_nodiv_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+# Step 3 - Create form for *.ipy file
+CreateIrrigationPracticeTSForCULocations(ID="*")
+# Step 4 - set max flood and surface water efficiencies and GWmode - NOT in HydroBase
+# Set Max SW Eff = 1.0
+SetIrrigationPracticeTS(ID="*",SurfaceDelEffMax=1.0,FloodAppEffMax=.54,SprinklerAppEffMax=.72,PumpingMax=0,GWMode=2)
+# Step 5 - Read category acreage from HydroBase
+ReadIrrigationPracticeTSFromHydroBase(ID="*",Year="1993",Div="6")
+ReadIrrigationPracticeTSFromHydroBase(ID="*",Year="2005",Div="6")
+ReadIrrigationPracticeTSFromHydroBase(ID="*",Year="2010",Div="6")
+# Step 6 - Read total acreage from *.cds file and Set total for *.ipy file
+ReadCropPatternTSFromStateCU(InputFile="..\StateCU\ym2015.cds")
+SetIrrigationPracticeTSTotalAcreageToCropPatternTSTotalAcreage(ID="*")
+# Step 7 - Set Acreage for Wyoming Structures
+# WY and 99 structures are associated with Wyoming and should not be included in CU & Losses reporting
+# Use set commands for Statemod Modeling efforts
+# SetIrrigationPracticeTS(ID="990539",AcresSWFlood=2519,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=2519)
+# SetIrrigationPracticeTS(ID="990538",AcresSWFlood=0,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=0)
+# SetIrrigationPracticeTS(ID="990540",AcresSWFlood=3491,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=3491)
+# SetIrrigationPracticeTS(ID="WYD_001",AcresSWFlood=272,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=272)
+# SetIrrigationPracticeTS(ID="WYD_002",AcresSWFlood=160,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=160)
+# SetIrrigationPracticeTS(ID="WYD_003",AcresSWFlood=313,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=313)
+# SetIrrigationPracticeTS(ID="WYD_004",AcresSWFlood=332,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=332)
+# SetIrrigationPracticeTS(ID="WYD_005",AcresSWFlood=1364,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=1364)
+# SetIrrigationPracticeTS(ID="WYD_006",AcresSWFlood=297,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=297)
+# SetIrrigationPracticeTS(ID="WYD_007",AcresSWFlood=2288,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=2288)
+# SetIrrigationPracticeTS(ID="WYD_009",AcresSWFlood=538,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=538)
+# SetIrrigationPracticeTS(ID="WYD_010",AcresSWFlood=306,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=306)
+# SetIrrigationPracticeTS(ID="WYD_011",AcresSWFlood=950,AcresSWSprinkler=0,AcresGWFlood=0,AcresGWSprinkler=0,PumpingMax=0,GWMode=2,AcresTotal=950)
+# Step 8 - Fill all land use acreage
+# Fill groundwater acreage first
+# Fill surface water sprinkler and flood 1908-2010
+# Fill ground water sprinkler and flood 1908-2010
+# Step 8a - estimate total GW and total SW
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWater",FillStart="1908",FillEnd="1993",FillDirection="Backward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWater",FillStart="1993",FillEnd="2004",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWater",FillStart="2005",FillEnd="2009",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWater",FillStart="2010",FillEnd="2013",FillDirection="Forward")
+# Step 8b - fill remaining irrigation method values
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-SurfaceWaterOnlySprinkler",FillStart="1908",FillEnd="1993",FillDirection="Backward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-SurfaceWaterOnlySprinkler",FillStart="1993",FillEnd="2004",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-SurfaceWaterOnlySprinkler",FillStart="2005",FillEnd="2009",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-SurfaceWaterOnlySprinkler",FillStart="2010",FillEnd="2013",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWaterSprinkler",FillStart="1908",FillEnd="1993",FillDirection="Backward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWaterSprinkler",FillStart="1993",FillEnd="2004",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWaterSprinkler",FillStart="2005",FillEnd="2009",FillDirection="Forward")
+FillIrrigationPracticeTSRepeat(ID="*",DataType="CropArea-GroundWaterSprinkler",FillStart="2010",FillEnd="2013",FillDirection="Forward")
+# Step 9 - Write final ipy file
+WriteIrrigationPracticeTSToStateCU(OutputFile="..\StateCU\ym2015.ipy")
+WriteIrrigationPracticeTSToStateCU(OutputFile="..\StateMod\ym2015.ipy")
