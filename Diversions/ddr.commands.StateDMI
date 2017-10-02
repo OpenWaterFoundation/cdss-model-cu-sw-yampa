@@ -1,0 +1,234 @@
+# ddr.commands.StateDMI
+#
+#  StateDMI command file to create the direct diversion rights file for the Yampa model
+#
+#  Step 1 - read structures from preliminary direct diversion station file
+#
+ReadDiversionStationsFromStateMod(InputFile="ym2015_dds.dds")
+#
+#  Step 2 - read aggregate and diversion system structure assignments.  Note that
+#        want to combine water rights for aggs and diversion systems, but
+#        water rights are assigned to primary and secondary components of multistructures
+#
+SetDiversionAggregateFromList(ListFile="ym_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+SetDiversionSystemFromList(ListFile="ym_divsys.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+#
+#  Step 3 - read diversion rights from HydroBase.
+#       Note that water rights classes are not used in the Yampa
+#
+ReadDiversionRightsFromHydroBase(ID="*",OnOffDefault=1)
+#
+#  Step 4 - set water rights for structure IDs different from or not included in HydroBase
+#
+# Set water rights for CO structures not in Hydrobase
+SetDiversionRight(ID="44_AMY001.01",Name="44_AMY001_YampaRbelCraig",StationID="ID",AdministrationNumber=1.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="55_AMY003.01",Name="55_AMY003_LSnakeRnrLily",StationID="ID",AdministrationNumber=1.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="57_AMY001.01",Name="57_AMY001_YampaRabCraig",StationID="ID",AdministrationNumber=1.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="58_AMY001.01",Name="58_AMY001_Yampa@Steamboat",StationID="ID",AdministrationNumber=1.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+#
+# Setting the transbasin diversion structure water right equal to the Stillwater Ditch.
+# Theoretically, the entire water right could be used to move water to the Colorado Basin.
+SetDiversionRight(ID="5804686.01",Name="Stillwater_Colo",StationID="ID",AdministrationNumber=22071.19623,Decree=30.8,OnOff=1,IfNotFound=Add,IfFound=Set)
+#
+# Set water rights for alternate points - not picked up from Hydrobase
+SetDiversionRight(ID="4400527.01",Name="AIR_LINE_IRR_D",StationID="ID",AdministrationNumber=17778.00000,Decree=6.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4402214.01",Name="WISE_DITCH_ALT_PT",StationID="ID",AdministrationNumber=19250.14032,Decree=2.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5500504.01",Name="ESCALANTA_PUMP_2",StationID="ID",AdministrationNumber=15080.00000,Decree=1.75,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5500504.02",Name="ESCALANTA_PUMP_2",StationID="ID",AdministrationNumber=18171.00000,Decree=3.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5500504.03",Name="ESCALANTA_PUMP_2",StationID="ID",AdministrationNumber=18746.00000,Decree=2.09,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5500504.04",Name="ESCALANTA_PUMP_2",StationID="ID",AdministrationNumber=19050.00000,Decree=1.17,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400687.01",Name="Lily Park Pump No 1",StationID="ID",AdministrationNumber=13249.00000,Decree=36.67,OnOff=1,IfNotFound=Add,IfFound=Set)
+#
+# Set water rights for WY structures
+#    Setting to very a junior right because they will not call out Colorado diversions
+#    No attempt is made to correctly model Wyoming water rights
+SetDiversionRight(ID="9900528.01",Name="Cheyenne_City",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="9900539.01",Name="WY_First_Mesa_Canal",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="9900540.01",Name="WY_Westside_Canal",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_001.01",Name="WY_Divs_blw_Slater_Creek",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_002.01",Name="WY_Divs_abv_High_Savery",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_003.01",Name="WY_Divs_blw_High_Savery",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_004.01",Name="WY_Divs_btwn_gages_Svery",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_005.01",Name="WY_Divs_lower_SaveryCrk",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_006.01",Name="WY_Divs_blw_SaveryCreek",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_007.01",Name="WY_Divs_blw_WillowCreek",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_008.01",Name="WY_Baggs&Dixon",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_009.01",Name="WY_Divs_Muddy_Creek",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_010.01",Name="WY_Divs_blw_Muddy_Creek",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="WYD_011.01",Name="WY_Divs_abv_StateLine",StationID="ID",AdministrationNumber=90000.00000,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+#
+# Setting conditional water rights as absolute for future structures, but turn the right off
+# Demands are set to zero in the .ddm file
+SetDiversionRight(ID="4402029.01",Name="YampaR_MilkCrk_PL",StationID="ID",AdministrationNumber=45923.00000,Decree=200.00,OnOff=0,IfNotFound=Add,IfFound=Warn)
+SetDiversionRight(ID="4402029.02",Name="YampaR_MilkCrk_PL",StationID="ID",AdministrationNumber=99996.00010,Decree=200.00,OnOff=0,IfNotFound=Add,IfFound=Warn)
+SetDiversionRight(ID="5801869.01",Name="Morrison Creek PL",StationID="ID",AdministrationNumber=52959.00000,Decree=50.0,OnOff=0,IfNotFound=Add,IfFound=Warn)
+SetDiversionRight(ID="5801919.01",Name="STEAMBOAT ELK RIVER PL",StationID="ID",AdministrationNumber=54769.00000,Decree=8.0,OnOff=0,IfNotFound=Add,IfFound=Warn)
+SetDiversionRight(ID="44_WSA.01",Name="44_WSA_EDFdemand",StationID="ID",AdministrationNumber=99999.99999,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects future development in Water District 44
+# Made junior to other FDP strutures to insure that upper FDP's would not be called out by 44_FDP001
+SetDiversionRight(ID="44_FDP001.01",Name="44_FDP_WD_44",StationID="ID",AdministrationNumber=99999.00002,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects future development in Water Districts 54 & 55
+SetDiversionRight(ID="55_FDP001.01",Name="Future_Dev",StationID="ID",AdministrationNumber=99999.00001,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects future development in Water District 56
+SetDiversionRight(ID="56_FDP001.01",Name="Future_Dev",StationID="ID",AdministrationNumber=99999.00001,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects future development in Water District 57
+SetDiversionRight(ID="57_FDP001.01",Name="Future_Dev",StationID="ID",AdministrationNumber=99999.00001,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="57_NPWR01.01",Name="Future_PWR",StationID="ID",AdministrationNumber=99999.99999,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="57_NMID01.01",Name="Future_M&I",StationID="ID",AdministrationNumber=99999.99999,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects 20,000 afd of future depletions in Water District 57
+# for ag, power & m&I, recommended by Yampa Mgmt. Group 3/2001 ra
+SetDiversionRight(ID="57_NAG01.01",Name="Future_Ag",StationID="ID",AdministrationNumber=99999.99999,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+# Structure reflects future development in Water District 58
+SetDiversionRight(ID="58_FDP001.01",Name="Future_Dev",StationID="ID",AdministrationNumber=99999.00001,Decree=999.00,OnOff=0,IfNotFound=Add,IfFound=Set)
+#
+#
+# Step 5 - Add Free water rights for structures historically diverting more than water rights
+SetDiversionRight(ID="9900538.01",Name="New_Wyo_Ag",StationID="ID",AdministrationNumber=99999.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400509.99",Name="WILSON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400514.99",Name="WOOLEY & JOHNSON D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400517.99",Name="YAMPA VAL STOCK BR CO D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400570.99",Name="CARD DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400572.99",Name="CARRIGAN-AVERILL D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400583.99",Name="CROSS MTN PUMP - GROUNDS",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400584.99",Name="CROSS MTN PUMP NO 1 & 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400586.99",Name="D D & E DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400587.99",Name="D D FERGUSON D NO 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400590.99",Name="DEER CK & MORAPOS D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400601.99",Name="DUNSTON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400607_D.99",Name="EGRY MESA DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400612.99",Name="ELKHORN IRR DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400628.99",Name="GIBBONS WILSON JORDAN D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400635.99",Name="GRIESER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400647.99",Name="HAUGHEY IRR DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400651.99",Name="HIGHLAND DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400660.99",Name="J A MARTIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400661.99",Name="J P MORIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400677.99",Name="K DIAMOND DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400681.99",Name="LAMB IRR DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400691.99",Name="M DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400699.99",Name="MCKINLAY DITCH NO 1",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400700.99",Name="MCKINLAY DITCH NO 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400702.99",Name="MCINTYRE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400706.99",Name="MILK CK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400711.99",Name="MOCK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400716.99",Name="MULLEN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400723.99",Name="NICHOLS DITCH NO 1",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400735.99",Name="PINE CK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400749.99",Name="ROUND BOTTOM D NO 1",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400751.99",Name="ROUND BOTTOM DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400770.99",Name="STARR IRRIG DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400778.99",Name="SUNBEAM DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400786.99",Name="TISDEL D NO 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400790.99",Name="UTLEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400806.99",Name="ELLGEN NO 2 DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400814.99",Name="HIGHLINE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400820.99",Name="LOWRY SEELEY PUMP",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400821.99",Name="MACK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400830.99",Name="OLD SWEENEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="4400863_D.99",Name="HENRY SWEENEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400531.99",Name="HEELEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400532.99",Name="HOME SUPPLY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400543.99",Name="LUCHINGER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400548.99",Name="MORGAN & BEELER D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400549.99",Name="MORGAN SLATER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400555.99",Name="PERKINS IRR DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400564.99",Name="SALISBURY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400568.99",Name="SLATER FORK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400574_D.99",Name="SLATER PARK DITCH NO 3",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400583.99",Name="TROWEL DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400591.99",Name="WILLOW CK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400592.99",Name="WILSON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5400594.99",Name="WOODBURY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5500537.99",Name="LEFEVRE NO 1 PUMP",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700508_D.99",Name="BROCK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700510.99",Name="CARY DITCH CO DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700519.99",Name="DENNIS & BLEWITT D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700535.99",Name="ERWIN IRRIGATING DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700544.99",Name="HIGHLAND DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700563.99",Name="MARSHALL ROBERTS DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700576_D.99",Name="ORNO DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700579_D.99",Name="R E CLARK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700584.99",Name="SADDLE MOUNTAIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700592.99",Name="SHELTON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700608.99",Name="TROUT CREEK DITCH 3",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700609.99",Name="TROUT CREEK DITCH 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700611.99",Name="WALKER IRRIG DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700622.99",Name="WILLIAMS IRRIG DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700623_D.99",Name="WILLIAMS PARK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5700635.99",Name="KOLL DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800500.99",Name="ACTON D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800508.99",Name="ALPHA DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800539.99",Name="BIG MESA DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800541.99",Name="BIRD DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800559.99",Name="BROOKS DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800564.99",Name="BUCKINGHAM MANDALL D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800574.99",Name="C R BROWN MOFFAT COAL D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800577.99",Name="CAMPBELL DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800583_D.99",Name="CHARLES H KEMMER D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800588.99",Name="CLARK & BURKE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800599.99",Name="CULLEN DITCH 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800604.99",Name="DAY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800612.99",Name="DEVER D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800618.99",Name="DUQUETTE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800623.99",Name="EKHART DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800626.99",Name="ELK VALLEY DITCH CO. D.",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800627.99",Name="ENTERPRISE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800634.99",Name="FERGUSON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800640.99",Name="FIRST CHANCE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800649_D.99",Name="FRANZ DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800662.99",Name="GRAHAM & BENNETT D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800663.99",Name="GREER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800684.99",Name="HERNAGE & KOLBE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800714.99",Name="KELLER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800717.99",Name="KINNEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800728.99",Name="LARSON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800731.99",Name="LAUGHLIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800738.99",Name="LINDSEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800749.99",Name="LOWER PLEASANT VALLEY D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800756.99",Name="LYON DITCH 2",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800763.99",Name="MANDALL DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800767.99",Name="MAYFLOWER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800782.99",Name="MOODY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800783.99",Name="MORIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800798.99",Name="NICKELL DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800807.99",Name="OAK DALE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800808.99",Name="OAKTON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800821.99",Name="PENNSYLVANIA DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800863.99",Name="SIMON DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800866.99",Name="SNOW BANK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800868.99",Name="SODA CREEK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800879.99",Name="STAFFORD DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800895_D.99",Name="SUNNYSIDE DITCH 1",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800908.99",Name="TRULL MORIN DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800914.99",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800915_D.99",Name="UPPER ELK RIVER D CO. D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800916.99",Name="UPPER PLEASANT VALLEY D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800920.99",Name="WALTON CREEK DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800922.99",Name="WEISKOPF DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800924.99",Name="WELCH & MONSON D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800928.99",Name="WHEELER BROS DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800933.99",Name="WHIPPLE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5800945.99",Name="WOOLEY DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5801021.99",Name="LEE IRRIGATION D",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5801035.99",Name="NORTH SIDE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5801074.99",Name="ROSSI HIGHLINE DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5801583.99",Name="STAGECOACH HYDROELECTRIC",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="5804685_D.99",Name="STILLWATER DITCH",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="44_ADY017.99",Name="ADY017_MilkCrabvGSpring",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+SetDiversionRight(ID="54_ADY023.99",Name="ADY023_LSnakeabvDryGlch",StationID="ID",AdministrationNumber=99996.99999,Decree=999.00,OnOff=1,IfNotFound=Add,IfFound=Set)
+#
+#  Step 6 - create direct diverison rights file
+#
+WriteDiversionRightsToStateMod(OutputFile="..\StateMod\ym2015.ddr")
+#
+# #  Step 7 - set direct diversion rights for future scenarios
+# #
+# SetDiversionRight(ID="44_FDP001.01",OnOff=1,IfNotFound=Warn,IfFound=Set)
+# SetDiversionRight(ID="55_FDP001.01",OnOff=1,IfNotFound=Warn,IfFound=Set)
+# SetDiversionRight(ID="56_FDP001.01",OnOff=1,IfNotFound=Warn,IfFound=Set)
+# SetDiversionRight(ID="57_FDP001.01",OnOff=1,IfNotFound=Warn,IfFound=Set)
+# SetDiversionRight(ID="58_FDP001.01",OnOff=1,IfNotFound=Warn,IfFound=Set)
+# #
+# #  Step 6 - create direct diverison rights file
+# #
+# WriteDiversionRightsToStateMod(OutputFile="..\StateMod\ym2045.ddr")

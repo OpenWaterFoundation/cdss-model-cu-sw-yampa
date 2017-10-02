@@ -1,0 +1,192 @@
+# eom.commands.TSTool
+#
+# Phase IIIb modifications
+# 	Fill missing data using water district indicator gages determined in demandts runs
+# Fill with historical monthly average if no wetness pattern average available
+#   Set start dates for reservoirs in March of year listed in Ray A fax (9/8/98)
+#
+#  08/21/2009 - Use *.stm with supplemental data fill with HydroBase Current Period
+#  To extend POR the fill2005.pat needs to be extended.
+#
+SetInputPeriod(InputStart="10/1908",InputEnd="09/2013")
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+ReadPatternFile(PatternFile="..\Diversions\fill2015.pat")
+#
+# fill with monthly average if fillpattern can not be determined for a certain
+#  month/wetness condition or if Task 11.1 reservoir.
+#
+# 4403902 - ELKHEAD CREEK RESERVOIR
+SetInputPeriod(InputStart="01/1974",InputEnd="12/2006")
+4403902.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="4403902.DWR.ResMeasStorage.Day",Alias="4403902",Bracket=16)
+Free(TSList=LastMatchingTSID,TSID="4403902.DWR.ResMeasStorage.Day")
+FillInterpolate(TSList=AllMatchingTSID,TSID="4403902",MaxIntervals=5,FillStart="10/1908")
+FillPattern(TSList=AllMatchingTSID,TSID="4403902",PatternID="09251000")
+SetInputPeriod(InputStart="10/1908",InputEnd="09/2013")
+# ReadStateMod(InputFile="C:\Google Drive\CDSS\ym2015\Reservoirs\4403902.stm",Alias="%L-CRWCD")
+ReadStateMod(InputFile="4403902.stm",Alias="%L-CRWCD")
+FillFromTS(TSList=AllMatchingTSID,TSID="4403902-CRWCD",IndependentTSList=AllMatchingTSID,IndependentTSID="4403902",RecalcLimits=True)
+Free(TSList=AllMatchingTSID,TSID="4403902")
+Copy(TSID="4403902-CRWCD",NewTSID="4403902.DWR..Month",Alias="%L")
+Free(TSList=AllMatchingTSID,TSID="4403902-CRWCD")
+SetConstant(TSList=AllMatchingTSID,TSID="4403902",ConstantValue=0,SetEnd="09/1974")
+#
+# Future reservoir - 4404323 - Milk Creek Reservoir
+NewTimeSeries(Alias="4404323",NewTSID="4404323...Month",Units="ACFT",InitialValue=0)
+#
+# Future reservoir - 4404325 - Rampart Reservoir
+NewTimeSeries(Alias="4404325",NewTSID="4404325...Month",Units="ACFT",InitialValue=0)
+#
+# Future reservoir - 44_LBear1 - Little Bear Reservoir
+NewTimeSeries(Alias="44_LBear1",NewTSID="44_LBear1...Month",Units="ACFT",InitialValue=0)
+#
+# Future reservoir - 44_MonButte - Monument Butte Reservoir
+NewTimeSeries(Alias="44_MonButte",NewTSID="44_MonButte...Month",Units="ACFT")
+#
+# Future reservoir - 44_SFrk2 - South Fork Reservoir
+NewTimeSeries(Alias="44_SFrk2",NewTSID="44_SFrk2...Month",Units="ACFT",InitialValue=0)
+#
+# 44_ARY001_YampaRbelCraig
+NewTimeSeries(Alias="44_ARY001",NewTSID="44_ARY001..Aggregate.Month",Description="Yampa Below Craig",Units="ACFT",InitialValue=23206)
+# 44_ARY002_YampaR@Deerlodge
+NewTimeSeries(Alias="44_ARY002",NewTSID="44_ARY002..Aggregate.Month",Description="Yampa River at Deerlodge",Units="ACFT",InitialValue=9122)
+# 44_ASY001_YampaRbelCraig
+NewTimeSeries(Alias="44_ASY001",NewTSID="44_ASY001..Aggregate.Month",Description="Yampa R Below Craig",Units="ACFT",InitialValue=8344)
+# 44_ASY002_YampaR@Deerlodge
+NewTimeSeries(Alias="44_ASY002",NewTSID="44_ASY002..Aggregate.Month",Description="Yampa River at Deerlodge",Units="ACFT",InitialValue=4441)
+#
+# 5404208 Pot Hook Dam
+NewTimeSeries(Alias="5704204",NewTSID="5704204...Month",Units="ACFT",InitialValue=0)
+#
+# 55_ARY003_LSnakeRnrLily
+NewTimeSeries(Alias="55_ARY003",NewTSID="55_ARY003..Aggregate.Month",Description="Little Snake Nr Lily",Units="ACFT",InitialValue=1494)
+# 55_ASY003_LSnakeRnrLily
+NewTimeSeries(Alias="55_ASY003",NewTSID="55_ASY003..Aggregate.Month",Description="Little Snake Nr Lily",Units="ACFT",InitialValue=3173)
+#
+# Future reservoir - 5704204 - Energy Fuel Reservoir 2 AKA Peabody Trout Creek Reservoir
+NewTimeSeries(Alias="5404208",NewTSID="5404208...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=0)
+#
+# 5803500 - ALLEN BASIN RES
+5803500.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803500.DWR.ResMeasStorage.Day",Alias="5803500",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803500",MaxIntervals=5)
+Free(TSList=LastMatchingTSID,TSID="5803500.DWR.ResMeasStorage.Day")
+FillPattern(TSList=LastMatchingTSID,TSID="5803500",PatternID="09239500")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803500")
+SetConstant(TSList=LastMatchingTSID,TSID="5803500",ConstantValue=0,SetEnd="03/1909")
+#
+# 5803508 - FISH CREEK RES
+# LCW - There is a clear change in the magnitude of EOM contents from 1996 to 1997
+#   Therefore, limiting the pattern fill analysis period to pre-1996.
+#   The reservoir was empty from 08/1994 - 09/1996 for the enlargement construction.
+5803508.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803508.DWR.ResMeasStorage.Day",Alias="5803508",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803508",MaxIntervals=5)
+SetInputPeriod(InputStart="01/1956",InputEnd="08/1994")
+5803508.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803508.DWR.ResMeasStorage.Day",Alias="5803508-pre1996",Bracket=16)
+FillPattern(TSList=LastMatchingTSID,TSID="5803508-pre1996",PatternID="09239500")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803508-pre1996")
+FillFromTS(TSList=AllMatchingTSID,TSID="5803508",IndependentTSList=AllMatchingTSID,IndependentTSID="5803508-pre1996",RecalcLimits=True)
+SetConstant(TSList=LastMatchingTSID,TSID="5803508",ConstantValue=0,SetStart="08/1994",SetEnd="09/1996")
+Free(TSList=LastMatchingTSID,TSID="5803508.DWR.ResMeasStorage.Day")
+Free(TSList=LastMatchingTSID,TSID="5803508.DWR.ResMeasStorage.Day")
+Free(TSList=LastMatchingTSID,TSID="5803508-pre1996")
+SetConstant(TSList=LastMatchingTSID,TSID="5803508",ConstantValue=0,SetEnd="03/1956")
+SetInputPeriod(InputStart="10/1908",InputEnd="09/2013")
+#
+# 5803521 - LESTER CK RESERVOIR
+5803521.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803521.DWR.ResMeasStorage.Day",Alias="5803521",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803521",MaxIntervals=5)
+FillPattern(TSList=LastMatchingTSID,TSID="5803521",PatternID="09239500")
+Free(TSList=LastMatchingTSID,TSID="5803521.DWR.ResMeasStorage.Day")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803521")
+ReplaceValue(TSList=AllMatchingTSID,TSID="5803521",MinValue=5657,MaxValue=10000,NewValue=5657)
+SetConstant(TSList=LastMatchingTSID,TSID="5803521",ConstantValue=0,SetEnd="05/1975")
+#
+# STILLWATER RESERVOIR 1
+# 5803540 - STILLWATER RES 1
+# LCW - examined the observed storage. Missing values are generally during the
+#   winter. Extending the interpolate MaxIntervals to 8 months.
+5803540.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803540.DWR.ResMeasStorage.Day",Alias="5803540",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803540",MaxIntervals=8)
+FillPattern(TSList=LastMatchingTSID,TSID="5803540",PatternID="09239500")
+Free(TSList=AllMatchingTSID,TSID="5803540.DWR.ResMeasStorage.Day")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803540")
+SetConstant(TSList=LastMatchingTSID,TSID="5803540",ConstantValue=0,SetEnd="03/1939")
+#
+# LAKE CATAMOUNT
+# Set Max = 7422 ACFT
+# 5803631 - LAKE CATAMOUNT
+5803631.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803631.DWR.ResMeasStorage.Day",Alias="5803631",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803631",MaxIntervals=5)
+FillPattern(TSList=LastMatchingTSID,TSID="5803631",PatternID="09239500")
+Free(TSList=AllMatchingTSID,TSID="5803631.DWR.ResMeasStorage.Day")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803631")
+ReplaceValue(TSList=AllMatchingTSID,TSID="5803631",MinValue=7422,MaxValue=10000,NewValue=7422)
+SetConstant(TSList=LastMatchingTSID,TSID="5803631",ConstantValue=0,SetEnd="10/1977")
+#
+# STEAMBOAT LAKE
+# 5803787 - STEAMBOAT LAKE
+5803787.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5803787.DWR.ResMeasStorage.Day",Alias="5803787",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5803787",MaxIntervals=5)
+FillPattern(TSList=LastMatchingTSID,TSID="5803787",PatternID="09239500")
+Free(TSList=AllMatchingTSID,TSID="5803787.DWR.ResMeasStorage.Day")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5803787")
+SetConstant(TSList=LastMatchingTSID,TSID="5803787",ConstantValue=0,SetEnd="02/1965")
+#
+# Future reservoir - 5803913 - Morrison Creek Reservoir
+NewTimeSeries(Alias="5803913",NewTSID="5803913...Month",Units="ACFT",InitialValue=0)
+#
+# STAGECOACH RESERVOIR
+# 5804213 - STAGECOACH RESERVOIR
+5804213.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5804213.DWR.ResMeasStorage.Day",Alias="5804213",Bracket=16)
+FillInterpolate(TSList=AllMatchingTSID,TSID="5804213",MaxIntervals=5)
+FillPattern(TSList=LastMatchingTSID,TSID="5804213",PatternID="09239500")
+Free(TSList=AllMatchingTSID,TSID="5804213.DWR.ResMeasStorage.Day")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5804213")
+SetConstant(TSList=LastMatchingTSID,TSID="5804213",ConstantValue=0,SetEnd="11/1988")
+#
+# YAMCOLO RESERVOIR
+# 5804240 - YAMCOLO RES
+# ReadStateMod(InputFile="C:\Google Drive\CDSS\ym2015\Reservoirs\5804240.stm",InputStart="01/1908",InputEnd="12/2013",Alias="%L-UYWCD")
+ReadStateMod(InputFile="5804240.stm",InputStart="01/1908",InputEnd="12/2013",Alias="%L-UYWCD")
+5804240.DWR.ResMeasStorage.Day~HydroBase
+NewEndOfMonthTSFromDayTS(DayTSID="5804240.DWR.ResMeasStorage.Day",Alias="5804240",Bracket=16)
+FillFromTS(TSList=AllMatchingTSID,TSID="5804240-UYWCD",IndependentTSList=AllMatchingTSID,IndependentTSID="5804240")
+FillInterpolate(TSList=AllMatchingTSID,TSID="5804240-UYWCD",MaxIntervals=5)
+FillPattern(TSList=LastMatchingTSID,TSID="5804240-UYWCD",PatternID="09239500")
+Free(TSList=AllMatchingTSID,TSID="5804240.DWR.ResMeasStorage.Day")
+Free(TSList=AllMatchingTSID,TSID="5804240")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5804240-UYWCD")
+SetConstant(TSList=LastMatchingTSID,TSID="5804240-UYWCD",ConstantValue=0,SetEnd="07/1980")
+Copy(TSID="5804240-UYWCD",NewTSID="5804240...Month",Alias="%L")
+Free(TSList=AllMatchingTSID,TSID="5804240-UYWCD")
+#
+# Wyoming's Reservoirs
+# 9903000
+NewTimeSeries(Alias="9903000",NewTSID="9903000...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=860)
+# 9903001
+NewTimeSeries(Alias="9903001",NewTSID="9903001...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=390)
+# 9903002 - High Savory reservoir is not in operation until 2006
+# ReadStateMod(InputFile="C:\Google Drive\CDSS\ym2015\Reservoirs\9903002.stm",Alias="%L")
+ReadStateMod(InputFile="9903002.stm",Alias="%L")
+SetConstant(TSList=AllMatchingTSID,TSID="9903002",ConstantValue=0,SetStart="01/1908",SetEnd="12/2003")
+# 9903003
+NewTimeSeries(Alias="9903003",NewTSID="9903003...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=0)
+# 9903004
+NewTimeSeries(Alias="9903004",NewTSID="9903004...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=290)
+# 9903005
+NewTimeSeries(Alias="9903005",NewTSID="9903005...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=0)
+# 9903007
+NewTimeSeries(Alias="9903007",NewTSID="9903007...Month",SetStart="10/1908",SetEnd="9/2013",Units="ACFT",InitialValue=0)
+#
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="*")
+FillConstant(TSList=AllMatchingTSID,TSID="*",ConstantValue=0)
+WriteStateMod(TSList=AllTS,OutputFile="..\StateMod\ym2015.eom",Precision=1)

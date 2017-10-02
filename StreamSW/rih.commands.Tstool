@@ -1,0 +1,94 @@
+# rih.commands.TSTool
+#
+# creates historical streamflow file for the Yampa River Basin.
+#
+#
+# Set Water Year and Output Period of 10/1908 - 9/2013
+SetOutputYearType(OutputYearType=Water)
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+#
+#
+# 09236000 - BEAR RIVER NEAR TOPONAS
+09236000.USGS.Streamflow.month~HydroBase
+# 09237500 - YAMPA RIVER BELOW STAGECOACH RESERVOIR
+09237500.USGS.Streamflow.month~HydroBase
+# 09238900 - FISH CREEK AT UPPER STATION NEAR STEAMBOAT SPRINGS
+09238900.USGS.Streamflow.month~HydroBase
+# 09239500 - YAMPA RIVER AT STEAMBOAT SPRINGS
+09239500.USGS.Streamflow.month~HydroBase
+#
+# LCW - Adding gage 09242500
+#
+# 09242500 - ELK RIVER NEAR MILNER, CO.
+09242500.USGS.Streamflow.Month~HydroBase
+#
+# 09241000 - ELK RIVER AT CLARK
+09241000.USGS.Streamflow.month~HydroBase
+# 09244410 - YAMPA RIVER BELOW DIVERSION, NEAR HAYDEN, CO.
+09244410.USGS.Streamflow.month~HydroBase
+#
+# LCW - recommend merging 09244410 with 09244490 after scaling by 0.88
+# 09244490 - YAMPA RIVER ABOVE ELKHEAD CREEK NEAR HAYDEN, CO
+09244490.USGS.Streamflow.Month~HydroBase
+Copy(TSID="09244490.USGS.Streamflow.Month",NewTSID="09244490...Month.Scaled",Alias="%L-Scaled")
+Scale(TSList=AllMatchingTSID,TSID="09244490-Scaled",ScaleValue=0.88)
+FillFromTS(TSList=AllMatchingTSID,TSID="09244410.USGS.Streamflow.month",IndependentTSList=AllMatchingTSID,IndependentTSID="09244490-Scaled")
+Free(TSList=AllMatchingTSID,TSID="09244490*")
+#
+# 09245000 - ELKHEAD CREEK NEAR ELKHEAD, CO.
+09245000.USGS.Streamflow.month~HydroBase
+#
+# LCW - tested merging 09245000 with 09246200 after scaling by 0.46,
+#     however, did not work well since 09246200 is downstream of atleast 2 major diversions
+#     on Elkhead Creek.
+# 09246200 - ELKHEAD CREEK ABOVE LONG GULCH, NEAR HAYDEN, CO
+# 09246200.USGS.Streamflow.Month~HydroBase
+# Copy(TSID="09246200.USGS.Streamflow.Month",NewTSID="09246200...Month.Scaled",Alias="%L-Scaled")
+# Scale(TSList=AllMatchingTSID,TSID="09246200-Scaled",ScaleValue=0.46)
+# FillFromTS(TSList=AllMatchingTSID,TSID="09245000.USGS.Streamflow.month",IndependentTSList=AllMatchingTSID,IndependentTSID="09246200-Scaled")
+# Free(TSList=AllMatchingTSID,TSID="09246200*")
+#
+# 09245500 - NORTH FORK ELKHEAD CREEK NEAR ELKHEAD, CO.
+09245500.USGS.Streamflow.month~HydroBase
+#
+# LCW - recommend merging the 2 USGS gages that were located on Fortification Creek
+# The older gage was located very close to the newer gage.
+# 09246920 - FORTIFICATION CREEK NR. FORTIFICATION, CO
+09246920.USGS.Streamflow.month~HydroBase
+# 09246900 - FORTIFICATION CREEK NEAR, CRAIG, CO.
+09246900.USGS.Streamflow.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="09246920.USGS.Streamflow.month",IndependentTSList=AllMatchingTSID,IndependentTSID="09246900.USGS.Streamflow.Month")
+Free(TSList=AllMatchingTSID,TSID="09246900.USGS.Streamflow.Month")
+#
+# 09247600 - YAMPA RIVER BELOW CRAIG
+09247600.USGS.Streamflow.month~HydroBase
+# 09249000 - EAST FORK OF WILLIAMS FORK NEAR PAGODA, CO.
+09249000.USGS.Streamflow.month~HydroBase
+# 09249200 - SOUTH FORK OF WILLIAMS FORK NEAR PAGODA, CO.
+09249200.USGS.Streamflow.month~HydroBase
+# 09249750 - WILLIAMS FORK AT MOUTH, NEAR HAMILTON, CO.
+09249750.USGS.Streamflow.month~HydroBase
+# 09251000 - YAMPA RIVER NEAR MAYBELL
+09251000.USGS.Streamflow.month~HydroBase
+# 09253000 - LITTLE SNAKE RIVER NEAR SLATER
+09253000.USGS.Streamflow.month~HydroBase
+# 09255000 - SLATER FORK NEAR SLATER
+09255000.USGS.Streamflow.month~HydroBase
+# 09258000 - WILLOW CREEK NEAR DIXON, WY.
+09258000.USGS.Streamflow.month~HydroBase
+# 09260000 - LITTLE SNAKE RIVER NEAR LILY
+09260000.USGS.Streamflow.month~HydroBase
+# 09260050 - YAMPA RIVER AT DEERLODGE PARK
+09260050.USGS.Streamflow.month~HydroBase
+#
+# Read in the USGS gages located in Wyoming. These are not stored in Hydrobase.
+# SAVERY CREEK AT UPPER STATION, NEAR SAVERY, WY
+# 09255500...month~StateMod~09255500.stm
+09255500...month~StateMod~09255500.stm
+# # SAVERY CREEK NEAR SAVERY, WY
+# 09256000...month~StateMod~09256000.stm
+# Little Snake River Near Dixon - This gage restarted 09/18/2014 - Can extend record for next update
+# 09257000...month~StateMod~09257000.stm
+#
+# Generate StateMod formatted file
+WriteStateMod(TSList=AllTS,OutputFile="..\StateMod\ym2015.rih",Precision=-1)

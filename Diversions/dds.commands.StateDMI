@@ -1,0 +1,107 @@
+# dds.commands.StateDMI
+#
+#  StateDMI command file to create the preliminary direct diversion station file
+#
+#  Step 1 - set year type and read list of direct diversion stations from network file
+#
+SetOutputYearType(OutputYearType=Water)
+ReadDiversionStationsFromNetwork(InputFile="..\Network\ym2015.net")
+#
+#  Step 2 - read aggregate and diversion system structure assignments.  Note that
+#        want to combine historical acreage and capacites for aggs and diversion systems.
+#
+SetDiversionAggregateFromList(ListFile="ym_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+SetDiversionSystemFromList(ListFile="ym_divsys.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+#
+#  Step 3 - read diversion station information from HydroBase and sort alphabetically
+#
+FillDiversionStationsFromHydroBase(ID="*")
+SortDiversionStations(Order=Ascending)
+#
+#  Step 4 - set global options for all structures
+#
+SetDiversionStation(ID="*",RiverNodeID="ID",OnOff=1,ReplaceResOption=0,DailyID="4",DemandType=1,UseType=1,DemandSource=1,EffAnnual=60,IfNotFound=Warn)
+SetDiversionStationDelayTablesFromNetwork(ID="*",DefaultTable=1)
+#
+#  Step 5 - set downstream return flow location, efficiencies and delay patterns based
+#           on return flow file
+#
+SetDiversionStationDelayTablesFromRTN(InputFile="ym2015.rtn",SetEfficiency=True)
+#
+#  Step 6 - overide HydroBase capacities and demand sources
+#
+# StateDMI expects monthly values to be entered in Calendar Year.
+#
+# Transbasin Diversions - demscr=6
+SetDiversionStation(ID="4400522",IrrigatedAcres=0,DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="4400581",DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+SetDiversionStation(ID="4400695",DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="5700512",DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="5704629",DemandSource=6,EffAnnual=0,IfNotFound=Warn)
+SetDiversionStation(ID="5800506",DemandSource=6,EffAnnual=0,IfNotFound=Warn)
+SetDiversionStation(ID="5800642",DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+SetDiversionStation(ID="5801583",DemandSource=6,EffAnnual=0,IfNotFound=Warn)
+SetDiversionStation(ID="5802374",DemandSource=6,EffAnnual=80,IfNotFound=Warn)
+SetDiversionStation(ID="5804630",Name="Dome_Creek_Ditch",DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="5804684",Name="Sarvis Ditch",DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="5804686",Name="Stillwater to Colorado",DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+# Aggregated M&I assumed assumed to have the same efficiency as City of Craig and Steamboat Springs - demscr=6
+SetDiversionStation(ID="44_AMY001",Name="44_AMY001_YampaRbelCraig",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+SetDiversionStation(ID="55_AMY003",Name="55_AMY003_LSnakeRnrLily",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+SetDiversionStation(ID="57_AMY001",Name="57_AMY001_YampaRabCraig",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+SetDiversionStation(ID="58_AMY001",Name="58_AMY001_AMY001_Yampa@Steamboat",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="10,12,14,44,55,62,61,56,44,26,0,10",IfNotFound=Warn)
+# Set diversion info for the endangered fish demand node, used only in baseline conditions
+# will be modeled as M&I node with zero consumption and returns coming back to the river
+# the same month as diverted, fish node zero CU or 100% return 5/17/2000 ra
+SetDiversionStation(ID="44_WSA",Name="44_WSA_EDFdemand",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffAnnual=0,Returns="4400702,100,4",IfNotFound=Warn)
+# Wyoming irrigation, transbasin, and M&I use (not in Hydrobase)
+# Wyoming's efficiencies, based on "wyoming_historic_use_estimates_2001.xls" 11/2001 ra
+SetDiversionStation(ID="9900528",Name="Cheyenne_City",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="9900538",Name="New_Wyo_Ag",Capacity=999,IrrigatedAcres=0,DemandSource=8,EffMonthly="0,0,0,19,23,24,35,39,28,9,0,0",IfNotFound=Warn)
+# Add additional Wyoming efficiencies based on GRBP for 2004 update -BEC
+SetDiversionStation(ID="9900539",Name="WY_First_Mesa_Canal",Capacity=999,IrrigatedAcres=2519,DemandSource=8,EffMonthly="0,0,0,0,16,22,35,55,10,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="9900540",Name="WY_Westside_Canal",Capacity=999,IrrigatedAcres=3491,DemandSource=8,EffMonthly="0,0,0,0,19,17,31,55,20,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_001",Name="WY_Divs_blw_Slater_Creek",Capacity=999,IrrigatedAcres=272,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_002",Name="WY_Divs_abv_High_Savery",Capacity=999,IrrigatedAcres=160,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_003",Name="WY_Divs_blw_High_Savery",Capacity=999,IrrigatedAcres=313,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_004",Name="WY_Divs_btwn_gages_Svery",Capacity=999,IrrigatedAcres=332,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_005",Name="WY_Divs_lower_SaveryCrk",Capacity=999,IrrigatedAcres=1364,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_006",Name="WY_Divs_blw_SaveryCreek",Capacity=999,IrrigatedAcres=297,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_007",Name="WY_Divs_blw_WillowCreek",Capacity=999,IrrigatedAcres=2288,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_008",Name="WY_Baggs&Dixon",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="67,68,68,86,100,81,70,69,70,69,70,67",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_009",Name="WY_Divs_Muddy_Creek",Capacity=999,IrrigatedAcres=538,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_010",Name="WY_Divs_blw_Muddy_Creek",Capacity=999,IrrigatedAcres=306,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+SetDiversionStation(ID="WYD_011",Name="WY_Divs_abv_StateLine",Capacity=999,IrrigatedAcres=950,DemandSource=8,EffMonthly="0,0,0,19,23,24,55,55,55,0,0,0",IfNotFound=Warn)
+# City of Steamboat and Mt. Werner Water and Sanitation District
+SetDiversionStation(ID="5805055",Name="STEAMBOAT MUN WELL A",OnOff=1,Capacity=6.67,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=60,Returns="5800559,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="5805059_D",Name="STEAMBOAT MUN WELL G & H",OnOff=1,Capacity=4.79,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=60,Returns="5800559,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="5805066",Name="MT WERNER YAMPA DIV",OnOff=1,Capacity=2.69,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=60,Returns="5800559,100,1",IfNotFound=Warn)
+# Carrier for Elkhead Resevoir releases to fish flows (50 cfs)
+#
+# Future nodes
+SetDiversionStation(ID="4402029",Name="Fut. Yampa R Milk Crk",OnOff=1,Capacity=400,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=0,Returns="4400675,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="4404325_D",Name="Fut Oxbow Rampart Res",OnOff=1,Capacity=999,ReplaceResOption=0,DailyID="4",DemandType=1,EffAnnual=51,Returns="4400687,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="5704204_D",Name="Fut Peabody Trout Res",OnOff=1,Capacity=999,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=100,Returns="5700519,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="5801869",Name="Fut Morrison Crk 04CW10",OnOff=1,Capacity=999,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=0,Returns="5804213,100,4",IfNotFound=Warn)
+SetDiversionStation(ID="5801919",Name="Fut STEAMBOAT ELK RIVER",OnOff=1,Capacity=999,ReplaceResOption=0,DailyID="4",DemandType=1,IrrigatedAcres=0,DemandSource=6,EffAnnual=100,Returns="5800783,100,1",IfNotFound=Warn)
+SetDiversionStation(ID="5804213_A",Name="Stagecoach Aug Plan",Capacity=999,IrrigatedAcres=0,DemandSource=8,EffAnnual=100,IfNotFound=Warn)
+#
+# Estimated M/I efficiencies for the 5 future M/I structures, based on BBC work
+# Though they are included here, not used in historical or calculated since demands are
+# zero for historical and baseflow conditions 12/24/98 ra
+SetDiversionStation(ID="44_FDP001",Name="44_FDP_WD_44",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="38,37,39,38,38,38,38,39,38,32,31,31",IfNotFound=Warn)
+SetDiversionStation(ID="55_FDP001",Name="Fu_Dev_55",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="16,16,16,16,16,16,16,16,16,16,16,16",IfNotFound=Warn)
+SetDiversionStation(ID="56_FDP001",Name="Fu_Dev_56",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="16,16,16,16,16,16,16,16,16,16,16,16",IfNotFound=Warn)
+SetDiversionStation(ID="57_FDP001",Name="Fu_Dev_57",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="29,30,34,34,33,35,33,36,35,32,31,30",IfNotFound=Warn)
+SetDiversionStation(ID="58_FDP001",Name="Fu_Dev_58",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="21,21,22,22,25,28,23,25,23,21,20,20",IfNotFound=Warn)
+# The additional 20,000 af of future demands 3/14/2001 ra
+SetDiversionStation(ID="57_NPWR01",Name="Nu_Fu_Pwr",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffAnnual=100,IfNotFound=Warn)
+SetDiversionStation(ID="57_NMID01",Name="Nu_Fu_M&I",Capacity=999,IrrigatedAcres=0,DemandSource=6,EffMonthly="38,38,38,38,39,38,32,31,31,38,37,39",IfNotFound=Warn)
+SetDiversionStation(ID="57_NAG01",Name="Nu_Ag_Dev",Capacity=999,IrrigatedAcres=0,DemandSource=8,EffMonthly="2,2,2,25,23,24,33,48,42,19,2,2",IfNotFound=Warn)
+#
+# Step 8 - Set Reservoir Replacement flag for all structures inside of the Upper Yampa Water Conservancy District
+SetDiversionStationsFromList(ListFile="UYWCD_Structures.txt",IDCol="1",ReplaceResOptionCol="2")
+#
+#  Step 9 - create preliminary direct diversion station file
+#
+WriteDiversionStationsToStateMod(OutputFile="ym2015_dds.dds")

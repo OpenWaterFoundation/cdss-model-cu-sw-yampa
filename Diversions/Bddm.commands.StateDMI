@@ -1,0 +1,114 @@
+#
+# Bddm.commands.StateDMI
+#
+#  StateDMI command file to create the Baseline demand file
+#    and the final direct diversion station file for all model runs
+#    updates monthly efficiencies in the direct diversion station file
+#    LCW 6/2015 - Updated to remove reliance on the .Cddm
+#
+#  Step 1 - set the output period, used to compute averages, and year type
+#
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#  Step 2 - Define diversion stations from preliminary diversion structure file
+# (ym2015_ddh.dds). This file is created by the ddh.commands.StateDMI command file
+#
+ReadDiversionStationsFromStateMod(InputFile="ym2015_ddh.dds")
+#
+#  Step 3 - read StateCU baseline
+#     irrigated water requirement file in StateMod TS format
+#
+ReadIrrigationWaterRequirementTSMonthlyFromStateCU(InputFile="..\StateMod\ym2015B.iwr")
+#
+#  Step 4 - read historical diversion file
+#
+ReadDiversionHistoricalTSMonthlyFromStateMod(InputFile="..\StateMod\ym2015.ddh")
+#
+#   Step 5 - calculate average monthly efficiencies = iwr/ddh
+#
+CalculateDiversionStationEfficiencies(ID="*",EffMin=0,EffMax=60,EffCalcStart=1975,EffCalcEnd=2013)
+#
+#   Step 6 - Set Efficiencies for special cases
+#   For multistructures, set efficiencies for secondary structures equal to primary structure
+#       (updated in the .dds file for use in natural flow calculations)
+#        Additionally, for secondary structures, set demand source to 5
+#        For primary structures, set demand source to 3
+# Primary = 5800564, secondary = 5800826, 5800710
+SetDiversionStation(ID="5800826",RiverNodeID="ID",DemandType=1,IrrigatedAcres=0,UseType=1,DemandSource=5,EffMonthly="54,54,54,54,53,48,46,51,53,53,54,54",IfNotFound=Warn)
+SetDiversionStation(ID="5800710",RiverNodeID="ID",DemandType=1,IrrigatedAcres=0,UseType=1,DemandSource=5,EffMonthly="54,54,54,54,53,48,46,51,53,53,54,54",IfNotFound=Warn)
+SetDiversionStation(ID="5800564",RiverNodeID="ID",DemandType=1,UseType=1,DemandSource=3,IfNotFound=Warn)
+# Primary = 5700544, secondary = 5700612
+SetDiversionStation(ID="5700612",RiverNodeID="ID",DemandType=1,IrrigatedAcres=0,UseType=1,DemandSource=5,EffMonthly="54,54,54,54,52,52,54,54,53,53,54,54",IfNotFound=Warn)
+SetDiversionStation(ID="5700544",RiverNodeID="ID",DemandType=1,UseType=1,DemandSource=3,IfNotFound=Warn)
+# Primary = 5700611, secondary = 5702083
+SetDiversionStation(ID="5702083",RiverNodeID="ID",DemandType=1,IrrigatedAcres=0,UseType=1,DemandSource=5,EffMonthly="42,43,53,43,33,26,39,44,40,29,54,54",IfNotFound=Warn)
+SetDiversionStation(ID="5700611",RiverNodeID="ID",DemandType=1,UseType=1,DemandSource=3,IfNotFound=Warn)
+# For structures that have no irrigated acreage assigned in 2010, set efficiency based on StateCU results.
+SetDiversionStation(ID="4400519",EffMonthly="0,0,0,15.2,35.7,40.6,31.6,20.3,13.5,11.8,0,0")
+SetDiversionStation(ID="4400674",EffMonthly="0,0,0,2.0,5.3,15.3,10.7,5.6,11.0,7.0,0,0")
+SetDiversionStation(ID="4400711",EffMonthly="0,0,0,0,25.1,26.9,25.8,26.1,14.5,0,0,0")
+SetDiversionStation(ID="4400851",EffMonthly="0,0,0,19.1,21.4,24.1,28.1,27.4,22.9,7.3,0,0")
+SetDiversionStation(ID="4401122",EffMonthly="0,0,0.4,4.8,14.0,21.6,32.4,35.6,25.7,10.9,1.7,0")
+#
+#   Step 7 - write efficiencies to final Direct Diversion Station file
+#
+WriteDiversionStationsToStateMod(OutputFile="..\StateMod\ym2015.dds")
+#
+#   Step 8 - updated calculated demand to equal max of calculated demand or historical diversion
+#
+CalculateDiversionDemandTSMonthly(ID="*")
+CalculateDiversionDemandTSMonthlyAsMax(ID="*")
+#
+#   Step 9 - zero out carriers and secondary structures for calculated data sets
+#
+# Primary structure = 5800564, secondary structures = 5800826, 5800710
+SetDiversionDemandTSMonthlyConstant(ID="5800826",Constant=0)
+SetDiversionDemandTSMonthlyConstant(ID="5800710",Constant=0)
+# Primary structure = 5700544, secondary structure = 5700612
+SetDiversionDemandTSMonthlyConstant(ID="5700612",Constant=0)
+# Primary structure = 5700611, secondary structure = 5702083
+SetDiversionDemandTSMonthlyConstant(ID="5702083",Constant=0)
+# Carrier to Allen Basin Reservoir
+SetDiversionDemandTSMonthlyConstant(ID="5800506",Constant=0)
+#
+#   Step 10 - set baseline demand that vary from calculated demand
+#
+# replace M&I diversions
+# Demands modified based on recommendation from the Yampa Hydro subcommittee 3/2001 ra
+SetDiversionDemandTSMonthly(ID="4400522",TSID="4400522...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="4400581",TSID="4400581...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="4400695",TSID="4400695...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5700512",TSID="5700512...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5800642",TSID="5800642...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5802374",TSID="5802374...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5801583",TSID="5801583...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5802374",TSID="5802374...Month.update~StateMod~M&I_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5805055",TSID="5805055...Month~StateMod~58_SteamboatWells_B.stm")
+SetDiversionDemandTSMonthly(ID="5805066",TSID="5805066...Month~StateMod~58_SteamboatWells_B.stm")
+SetDiversionDemandTSMonthly(ID="5805059_D",TSID="5805059_D...Month~StateMod~58_SteamboatWells_B.stm")
+#
+# replace transmountain diversions
+SetDiversionDemandTSMonthly(ID="5804630",TSID="5804630..DivTotal.MONTH~StateMod~Transmountain_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5804684",TSID="5804684..DivTotal.MONTH~StateMod~Transmountain_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="5804686",TSID="5804686..DivTotal.MONTH~StateMod~Transmountain_Baseline.stm")
+SetDiversionDemandTSMonthly(ID="9900528",TSID="9900528..DivTotal.MONTH~StateMod~9900528_Baseline.stm")
+#
+# Step 11 - read pattern file, and fill remaining missiong values based on assigned pattern ID
+#
+ReadPatternFile(InputFile="fill2015.pat")
+#
+FillDiversionDemandTSMonthlyPattern(ID="*",PatternID="09239500")
+FillDiversionDemandTSMonthlyPattern(ID="55*",PatternID="09260000")
+FillDiversionDemandTSMonthlyPattern(ID="44*",PatternID="09251000")
+FillDiversionDemandTSMonthlyPattern(ID="56*",PatternID="09251000")
+FillDiversionDemandTSMonthlyPattern(ID="WYD_010",PatternID="09260000")
+FillDiversionDemandTSMonthlyPattern(ID="WYD_011",PatternID="09260000")
+#
+#   Step 12 - Fill remaining missing with month average
+#
+FillDiversionDemandTSMonthlyAverage(ID="*")
+#
+#   Step 13 - Create baseline demand file
+#
+WriteDiversionDemandTSMonthlyToStateMod(OutputFile="..\StateMod\ym2015B.ddm")

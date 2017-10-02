@@ -1,0 +1,84 @@
+#
+# Lisa Wade @ Wilson Water Group
+#
+# Creating an .stm file that has all of the Yampa Basin Municipal and Industrial Demands
+# that need to get set for the Baseline simulation
+#
+# Step 1: Read in the values used in the previous update
+# Step 2: Read in the recently recorded diversions from Hydrobase
+# Step 3: Find the new monthly average
+# Step 4: Write out the .stm
+#
+SetInputPeriod(InputStart="10/1974",InputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+#
+# 4400522 - Craig Station
+ReadStateMod(InputFile="4400522_original.stm",Alias="%L-orig")
+# 4400522 - CRAIG STATION D & PL #1
+4400522.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="4400522-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="4400522.DWR.DivTotal.Month",RecalcLimits=True)
+NewStatisticTimeSeries(TSID="4400522-orig",Alias="%L-update",NewTSID="4400522...Month.update",Statistic=Mean)
+#
+# 4400581 - CRAIG WATER SUPPLY PIPELINE
+ReadStateMod(InputFile="4400581_original.stm",Alias="%L-orig")
+# 4400581 - CRAIG WATER SUPPLY PL
+4400581.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="4400581-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="4400581.DWR.DivTotal.Month",RecalcLimits=False)
+NewStatisticTimeSeries(TSID="4400581-orig",Alias="%L-update",NewTSID="4400581...Month.update",Statistic=Mean)
+#
+# 4400695 - Maybell Mill and Pipeline
+ReadStateMod(InputFile="4400695_original.stm",Alias="%L-orig")
+# 4400695 - MAYBELL MILL PIPELINE
+4400695.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="4400695-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="4400695.DWR.DivTotal.Month",RecalcLimits=False)
+NewStatisticTimeSeries(TSID="4400695-orig",Alias="%L-update",NewTSID="4400695...Month.update",Statistic=Mean)
+#
+# 5700512 - Colorado Utilities Ditch & P/L
+# Average annual demand should be 5414 acre-feet (per Lauren Nance, May 2016)
+# Monthly pattern should approximate the 1984-1999 time period
+#
+SetInputPeriod(InputStart="10/1985",InputEnd="09/1999")
+5700512.DWR.DivTotal.Month~HydroBase
+NewStatisticTimeSeries(TSID="5700512.DWR.DivTotal.Month",Alias="%L-%Z",NewTSID="5700512...Month.Mean",Statistic=Mean,OutputStart="10/1908",OutputEnd="09/2013")
+ChangeInterval(TSList=AllMatchingTSID,TSID="5700512-Mean",Alias="%L-Total",NewInterval=Year,OldTimeScale=ACCM,NewTimeScale=ACCM,OutputYearType=Water)
+Disaggregate(TSID="5700512-Total",Alias="%L-Disag",Method=SameValue,NewInterval=Month)
+Copy(TSID="5700512-Mean",NewTSID="5700512...Month.Percent",Alias="%L-%Z")
+Divide(TSID="5700512-Percent",DivisorTSID="5700512-Disag")
+NewTimeSeries(Alias="%L-update",NewTSID="5700512...Month.update",SetStart="10/1908",SetEnd="09/2013",Units="ACFT",InitialValue=5414)
+Multiply(TSID="5700512-update",MultiplierTSID="5700512-Percent",NewUnits="ACFT")
+Free(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month")
+Free(TSList=AllMatchingTSID,TSID="5700512-Mean")
+Free(TSList=AllMatchingTSID,TSID="5700512-Total")
+Free(TSList=AllMatchingTSID,TSID="5700512-Disag")
+Free(TSList=AllMatchingTSID,TSID="5700512-Percent")
+#
+SetInputPeriod(InputStart="10/1974",InputEnd="09/2013")
+#
+#
+# 5800642 - FISH CREEK MUNICIPAL INTAKE
+ReadStateMod(InputFile="5800642_original.stm",Alias="%L-orig")
+# 5800642 - FISH CR MUN WATER INTAKE
+5800642.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="5800642-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="5800642.DWR.DivTotal.Month",RecalcLimits=False)
+NewStatisticTimeSeries(TSID="5800642-orig",Alias="%L-update",NewTSID="5800642...Month.update",Statistic=Mean)
+#
+# 5801583 - Stagecoach Hydropower plant
+ReadStateMod(InputFile="5801583_original.stm",Alias="%L-orig")
+# 5801583 - STAGECOACH HYDROELECTRIC
+5801583.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="5801583-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="5801583.DWR.DivTotal.Month",RecalcLimits=False)
+NewStatisticTimeSeries(TSID="5801583-orig",Alias="%L-update",NewTSID="5801583...Month.update",Statistic=Mean)
+#
+# 5802374 - Steamboat snowmaking pipeline
+ReadStateMod(InputFile="5802374_original.stm",Alias="%L-orig")
+# 5802374 - STEAMBOAT SKI CORPORATION SNOWMAKING EQU
+5802374.DWR.DivTotal.Month~HydroBase
+FillFromTS(TSList=AllMatchingTSID,TSID="5802374-orig",IndependentTSList=AllMatchingTSID,IndependentTSID="5802374.DWR.DivTotal.Month",RecalcLimits=False)
+NewStatisticTimeSeries(TSID="5802374-orig",Alias="%L-update",NewTSID="5802374...Month.update",Statistic=Mean)
+#
+WriteStateMod(TSList=AllMatchingTSID,TSID="*update*",OutputFile="M&I_Baseline.stm")
+#
+#
+#
+#

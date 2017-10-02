@@ -1,0 +1,82 @@
+# Combined Files - 44_FDP001, 55_FDP001, 56_FDP001, 57_FDP001, 57_NAG001, 57_NMI001, 57_NPWR01, 58_FDP001
+#
+# 44_FDP001- Fish demand from CWCB account in Elkhead
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     44_EDF2                             ACFT                       44_EDF2
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe.com)
+#
+# 55_FDP001
+#Future Development at year 2025 as determined by BBC for Water Districts 54 & 55 12/24/98 ra
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     55_FDP001                           ACFT                       55_FDP001
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe.com)
+#
+# 56_FDP001
+#Future Development at year 2045 as determined by BBC for Water District 56 12/24/98 ra
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     56_FDP001                           ACFT                       56_FDP001
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe.com)
+#
+# 57_FDP001
+#Future Development at year 2025 High Range as determined by BBC for Water District 57 12/24/98 ra
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     57_FDP001                           ACFT                       57_FDP001
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe.com)
+#
+# 57_NAG01
+#Future Development at year 2045 High Range as determined by BBC for Water District 57 3/13/2001 ra
+# This demand reflects 1/3 of the additional 20,000 af of depletions beyond the the depletions at 2045 for Ag.
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     57_NAG01                           ACFT                       57_NAG01
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe)
+#
+# 57_NMID01
+#Future Development at year 2045 High Range as determined by BBC for Water District 57 3/13/2001 ra
+# This demand reflects 1/3 of the additional 20,000 af of depletions beyond the the depletions at 2045 for M&I
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     57_NMID01                          ACFT                       57_NMID01
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe)
+#
+#
+# 57_NPWR01
+#Future Development at year 2045 High Range as determined by BBC for Water District 57 3/13/2001 ra
+# This demand reflects 1/3 of the additional 20,000 af of depletions beyond the the depletions at 2045 for power
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     57_NPWR01                          ACFT                       57_NPWR01
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe)
+#
+#
+# 58_FDP001
+#Future Development at year 2025 as determined by BBC for Water District 58 12/24/98 ra
+#TS ID                      Type Source   Units  Period of Record    Location   Description
+#     58_FDP001                           ACFT                       58_FDP001
+#
+# 1999-2004 Updated based on averages, James Heath (Heath@lrcwe)
+#
+# --------------------------------------------------------------------------------------
+# Steve Malers fixed references to Google Drive files
+# 44_EDF2...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\44_FDP001.stm
+# 55_FDP001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\55_FDP001.stm
+# 56_FDP001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\56_FDP001.stm
+# 57_FDP001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\57_FDP001.stm
+# 57_NAG01...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\57_NAG01.stm
+# 57_NMID01...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\57_NMID01.stm
+# 57_NPWR01...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\57_NPWR01.stm
+# 58_FDP001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\58_FDP001.stm
+# WriteStateMod(TSList=AllTS,OutputFile="C:\Google Drive\CDSS\ym2015\Diversions\Future_Demands.stm")
+44_EDF2...MONTH~StateMod~44_FDP001.stm
+55_FDP001...MONTH~StateMod~55_FDP001.stm
+56_FDP001...MONTH~StateMod~56_FDP001.stm
+57_FDP001...MONTH~StateMod~57_FDP001.stm
+57_NAG01...MONTH~StateMod~57_NAG01.stm
+57_NMID01...MONTH~StateMod~57_NMID01.stm
+57_NPWR01...MONTH~StateMod~57_NPWR01.stm
+58_FDP001...MONTH~StateMod~58_FDP001.stm
+WriteStateMod(TSList=AllTS,OutputFile="Future_Demands.stm")

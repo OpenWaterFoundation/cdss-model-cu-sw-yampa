@@ -1,0 +1,105 @@
+# Htar.commands.TSTool
+#
+# Set the maximum reservoir target end of month content equal to the historical observed
+# Set the minimum reservoir target end of month content equatl to zero.
+#
+#
+SetInputPeriod(InputStart="09/1908",InputEnd="10/2013")
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#
+# ELKHEAD RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="4403902.Min..Month",Units="ACFT",InitialValue=0)
+4403902...MONTH~StateMod~..\StateMod\ym2015.eom
+# Milk Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="4404323.Min..Month",Units="ACFT",InitialValue=0)
+4404323...MONTH~StateMod~..\StateMod\ym2015.eom
+# 4404325 - Rampart Reservoir
+NewTimeSeries(Alias="%L",NewTSID="4404325.Min..Month",Units="ACFT",InitialValue=0)
+4404325...MONTH~StateMod~..\StateMod\ym2015.eom
+# Little Bear 1
+NewTimeSeries(Alias="%L",NewTSID="44_LBear1.Min..Month",Units="ACFT",InitialValue=0)
+44_LBear1...MONTH~StateMod~..\StateMod\ym2015.eom
+# Monument Butte
+NewTimeSeries(Alias="%L",NewTSID="44_MonButte.Min..Month",Units="ACFT",InitialValue=0)
+44_MonButte...MONTH~StateMod~..\StateMod\ym2015.eom
+# South Fork 2
+NewTimeSeries(Alias="%L",NewTSID="44_SFrk2.Min..Month",Units="ACFT",InitialValue=0)
+44_SFrk2...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ARY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ARY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ARY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ARY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ASY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ASY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5404208 Pot Hook Dam
+NewTimeSeries(Alias="%L",NewTSID="5404208.Min..Month",Units="ACFT",InitialValue=0)
+5404208...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ARY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ARY003.Min..Month.",Units="ACFT",InitialValue=0)
+55_ARY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ASY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ASY003.Min..Month",Units="ACFT",InitialValue=0)
+55_ASY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5704204 - Peabody Trout Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="5704204.Min..Month",Units="ACFT",InitialValue=0)
+5704204...MONTH~StateMod~..\StateMod\ym2015.eom
+# ALLEN BASIN RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803500.Min..Month",Units="ACFT",InitialValue=0)
+5803500...MONTH~StateMod~..\StateMod\ym2015.eom
+# FISH CREEK RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803508.Min..Month",Units="ACFT",InitialValue=0)
+5803508...MONTH~StateMod~..\StateMod\ym2015.eom
+# LESTER CREEK RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803521.Min..Month",Units="ACFT",InitialValue=0)
+5803521...MONTH~StateMod~..\StateMod\ym2015.eom
+# STILLWATER RESERVOIR 1
+NewTimeSeries(Alias="%L",NewTSID="5803540.Min..Month",Units="ACFT",InitialValue=0)
+5803540...MONTH~StateMod~..\StateMod\ym2015.eom
+# LAKE CATAMOUNT
+NewTimeSeries(Alias="%L",NewTSID="5803631.Min..Month",Units="ACFT",InitialValue=0)
+5803631...MONTH~StateMod~..\StateMod\ym2015.eom
+# STEAMBOAT LAKE
+NewTimeSeries(Alias="%L",NewTSID="5803787.Min..Month",Units="ACFT",InitialValue=0)
+5803787...MONTH~StateMod~..\StateMod\ym2015.eom
+# Future Reservoir - 5803913 - Morrison Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="5803913.Min..Month",Units="ACFT",InitialValue=0)
+5803913...MONTH~StateMod~..\StateMod\ym2015.eom
+# STAGECOACH RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5804213.Min..Month",Units="ACFT",InitialValue=0)
+5804213...MONTH~StateMod~..\StateMod\ym2015.eom
+# YAMCOLO RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5804240.Min..Month",Units="ACFT",InitialValue=0)
+5804240...MONTH~StateMod~..\StateMod\ym2015.eom
+# Wyoming's Reservoirs
+# 9903000
+NewTimeSeries(Alias="%L",NewTSID="9903000.Min..Month",Units="ACFT",InitialValue=0)
+9903000...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903001
+NewTimeSeries(Alias="%L",NewTSID="9903001.Min..Month",Units="ACFT",InitialValue=0)
+9903001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903002
+NewTimeSeries(Alias="%L",NewTSID="9903002.Min..Month",Units="ACFT",InitialValue=0)
+9903002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903003
+NewTimeSeries(Alias="%L",NewTSID="9903003.Min..Month",Units="ACFT",InitialValue=0)
+9903003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903004
+NewTimeSeries(Alias="%L",NewTSID="9903004.Min..Month",Units="ACFT",InitialValue=0)
+9903004...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903005
+NewTimeSeries(Alias="%L",NewTSID="9903005.Min..Month",Units="ACFT",InitialValue=0)
+9903005...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903007
+NewTimeSeries(Alias="%L",NewTSID="9903007.Min..Month",Units="ACFT",InitialValue=0)
+9903007...MONTH~StateMod~..\StateMod\ym2015.eom
+#
+#
+WriteStateMod(TSList=AllTS,OutputFile="..\StateMod\ym2015H.tar",Precision=1)

@@ -1,0 +1,106 @@
+# ris.commands.StateDMI
+#
+# StateDMI command file to create streamflow station file for the Yampa River
+#
+#  Step 1 - read streamgages and baseflows ids from the network file
+#
+ReadStreamGageStationsFromNetwork(InputFile="..\Network\ym2015.net",IncludeStreamEstimateStations="True")
+#
+#  Step 2 - read baseflow nodes names from HydroBase, fill in missing names from the network file
+#
+FillStreamGageStationsFromHydroBase(ID="*",NameFormat=StationName,CheckStructures=True)
+FillStreamGageStationsFromNetwork(ID="*",NameFormat="StationName")
+#
+#  Step 3 - set streamgage station to use to disaggregate monthly baseflows to daily
+#
+#  Set daily pattern gages for WD 99 (Wyoming)
+SetStreamGageStation(ID="99*",DailyID="09253000",IfNotFound=Warn)
+#
+#  Set daily pattern gages for WD 58
+SetStreamGageStation(ID="58*",DailyID="09239500",IfNotFound=Warn)
+#  set Fish Creek
+SetStreamGageStation(ID="5803508",DailyID="09238900",IfNotFound=Warn)
+SetStreamGageStation(ID="09238900",DailyID="09238900",IfNotFound=Warn)
+#  set Elk River
+SetStreamGageStation(ID="5800811",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5803787",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5803521",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5800895_D",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="58_ADY006",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5802304",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5800917",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5800590",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5800640",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5802254",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="5800940",DailyID="09241000",IfNotFound=Warn)
+SetStreamGageStation(ID="09241000",DailyID="09241000",IfNotFound=Warn)
+#
+#  Set daily pattern gages for WD 57
+SetStreamGageStation(ID="57*",DailyID="09251000",IfNotFound=Warn)
+#  set Yampa River
+SetStreamGageStation(ID="5701009",DailyID="09239500",IfNotFound=Warn)
+SetStreamGageStation(ID="5700544",DailyID="09239500",IfNotFound=Warn)
+SetStreamGageStation(ID="09236000",DailyID="09239500",IfNotFound=Warn)
+SetStreamGageStation(ID="09237500",DailyID="09239500",IfNotFound=Warn)
+SetStreamGageStation(ID="09244410",DailyID="09239500",IfNotFound=Warn)
+SetStreamGageStation(ID="09239500",DailyID="09239500",IfNotFound=Warn)
+# LCW - testing model with 57_ADY010 not set as a baseflow node.
+# SetStreamGageStation(ID="57_ADY010",DailyID="09239500",IfNotFound=Warn)
+#
+#  Set daily pattern gages for WD 56
+SetStreamGageStation(ID="56*",DailyID="09251000",IfNotFound=Warn)
+#
+#  Set daily pattern gages for WD 54
+SetStreamGageStation(ID="54*",DailyID="09253000",IfNotFound=Warn)
+#  set Slater Fork and Savery Creek
+SetStreamGageStation(ID="5402076",DailyID="09255000",IfNotFound=Warn)
+SetStreamGageStation(ID="5400574_D",DailyID="09255000",IfNotFound=Warn)
+SetStreamGageStation(ID="09255000",DailyID="09255000",IfNotFound=Warn)
+SetStreamGageStation(ID="WYD_002",DailyID="09255000",IfNotFound=Warn)
+# SetStreamGageStation(ID="9903002",DailyID="09256000",IfNotFound=Warn)
+# SetStreamGageStation(ID="09256000",DailyID="09255000",IfNotFound=Warn)
+#  set Willow Creek
+SetStreamGageStation(ID="5400554",DailyID="09258000",IfNotFound=Warn)
+SetStreamGageStation(ID="09258000",DailyID="09258000",IfNotFound=Warn)
+#  set Muddy Creek
+SetStreamGageStation(ID="WYD_009",DailyID="09258000",IfNotFound=Warn)
+#
+#  Set daily pattern gages for WD 44
+SetStreamGageStation(ID="44*",DailyID="09251000",IfNotFound=Warn)
+SetStreamGageStation(ID="09247600",DailyID="09251000",IfNotFound=Warn)
+SetStreamGageStation(ID="09249750",DailyID="09251000",IfNotFound=Warn)
+SetStreamGageStation(ID="09251000",DailyID="09251000",IfNotFound=Warn)
+SetStreamGageStation(ID="09260050",DailyID="09251000",IfNotFound=Warn)
+#  set Elkhead Creek and Fortification Creek
+SetStreamGageStation(ID="09245000",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400614",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="09245500",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400533",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4403902",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="44_SFrk2",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="09246920",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400998",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400573",DailyID="09245000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400785",DailyID="09245000",IfNotFound=Warn)
+#  set upper Williams Fork
+SetStreamGageStation(ID="4401451",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="44_ADY014",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="09249000",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400652",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400585",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="09249200",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="4401454",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="4400644",DailyID="09253000",IfNotFound=Warn)
+#  set Upper Little Snake River
+SetStreamGageStation(ID="09253000",DailyID="09253000",IfNotFound=Warn)
+SetStreamGageStation(ID="WYD_006",DailyID="09253000",IfNotFound=Warn)
+# SetStreamGageStation(ID="09257000",DailyID="09253000",IfNotFound=Warn)
+#
+#  add set daily pattern gages for WD 55 (none)
+# SetStreamGageStation(ID="55*",DailyID="09260000",IfNotFound=Warn)
+#  set Lower Little Snake River
+SetStreamGageStation(ID="09260000",DailyID="09260000",IfNotFound=Warn)
+#
+#  Step 4 - create streamflow station file
+#
+WriteStreamGageStationsToStateMod(OutputFile="..\StateMod\ym2015.ris")

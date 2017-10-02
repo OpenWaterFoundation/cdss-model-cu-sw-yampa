@@ -1,0 +1,131 @@
+# ddh.commands.StateDMI
+#
+#  StateDMI command file to create the historical diversion file
+#           and the preliminary direct diversion structure file, updated to set
+#           structure capacity = maximum historical diversion
+#
+#  Step 1 - set time-series period and year type
+#
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="9/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#  Step 2 - read structure list from preliminary direct diversion structure file
+#
+ReadDiversionStationsFromStateMod(InputFile="ym2015_dds.dds")
+#
+#  Step 3 - read aggregate and diversion system structure assignments.  Note that
+#        want to combine historical diversions for aggs and diversion systems, but
+#        historical diversions are separate for primary and secondary components of multistructures
+#
+SetDiversionAggregateFromList(ListFile="ym_agg.csv",IDCol=1,PartIDsCol=2,PartsListedHow=InColumn)
+SetDiversionSystemFromList(ListFile="ym_divsys.csv",IDCol=1,NameCol=2,PartIDsCol=3,PartsListedHow=InRow)
+#
+#  Step 4 - read historical diversions from HydroBase. Note that want individual structures
+#           in aggregates and diversion systems to be filled first, then diversions combined.
+#
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="*",IncludeCollections=False,UseDiversionComments=True)
+#
+#  Step 5 - read fill pattern file, and assign patterns to water districts
+#
+ReadPatternFile(InputFile="fill2015.pat")
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09239500",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="55*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09260000",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="44*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09251000",FillPatternOrder=1,FillAverageOrder=2)
+ReadDiversionHistoricalTSMonthlyFromHydroBase(ID="56*",IncludeExplicit=False,UseDiversionComments=True,PatternID="09251000",FillPatternOrder=1,FillAverageOrder=2)
+#
+#
+#  Step 6 - set diversions from external time-series files
+#
+# Wyoming's future ag. demand(2040), set to zero for historic.
+SetDiversionHistoricalTSMonthlyConstant(ID="9900538",Constant=0,SetEnd="10/2013")
+#
+# Replacement time series for aggregated M&I structures
+# Aggregate M&I modified to reflect the work of BBC 2/2/99 ra
+SetDiversionHistoricalTSMonthly(ID="44_AMY001",TSID="44_AMY001...MONTH~StateMod~44_AMY001.stm")
+SetDiversionHistoricalTSMonthly(ID="55_AMY003",TSID="55_AMY003...MONTH~StateMod~55_AMY003.stm")
+SetDiversionHistoricalTSMonthly(ID="57_AMY001",TSID="57_AMY001...MONTH~StateMod~57_AMY001.stm")
+SetDiversionHistoricalTSMonthly(ID="58_AMY001",TSID="58_AMY001...MONTH~StateMod~58_AMY001.stm")
+#
+# Steamboat Springs Wells added as part of the PnM effort.
+SetDiversionHistoricalTSMonthly(ID="5805055",TSID="5805055...MONTH~StateMod~58_SteamboatWells_H.stm")
+SetDiversionHistoricalTSMonthly(ID="5805059_D",TSID="5805059_D...MONTH~StateMod~58_SteamboatWells_H.stm")
+SetDiversionHistoricalTSMonthly(ID="5805066",TSID="5805066...MONTH~StateMod~58_SteamboatWells_H.stm")
+#
+# Erroneous in Hydrobase for 5402068, set to missing
+SetDiversionHistoricalTSMonthly(ID="5402068",TSID="5402068...MONTH~StateMod~5402068.stm")
+#
+# For the historic and calculated series the endangered fish node, 44_WSA, has zero demand.
+SetDiversionHistoricalTSMonthlyConstant(ID="44_WSA",Constant=0)
+#
+# Stillwater Ditch .stm separates the total diversions into uses in the Yampa basin
+#     exports to the Colorado Basin.
+SetDiversionHistoricalTSMonthly(ID="5804686",TSID="5304715.DWR.DivTotal.Month~StateMod~Stillwater.stm")
+SetDiversionHistoricalTSMonthly(ID="5804685_D",TSID="5804685.DWR.DivTotal.Month~StateMod~Stillwater.stm")
+#
+# Hayden Station (power plant) has bad data in Hydrobase from 2000 - 2009 due to bad gage readings
+# Unit 1 came on-line in 1966 and Unit 2 in 1972
+SetDiversionHistoricalTSMonthly(ID="5700512",TSID="5700512...MONTH~StateMod~5700512_Hist.stm")
+#
+# City of Cheyenne
+# Cheyenne's use started diverting in 1969, based on John Shields 11/2000 ra
+SetDiversionHistoricalTSMonthlyConstant(ID="9900528",Constant=0,SetEnd="09/1968")
+SetDiversionHistoricalTSMonthly(ID="9900528",TSID="9900528...MONTH~StateMod~WYD.stm")
+#
+# Add additional Wyoming diversions for 2004 update -BEC
+# LCW 6/2015 - Update diversion information for 9900539 (First Mesa Ditch) and 9900540 (Westside Canal)
+SetDiversionHistoricalTSMonthly(ID="9900539",TSID="9900539...MONTH~StateMod~9900539.stm")
+SetDiversionHistoricalTSMonthly(ID="9900540",TSID="9900540...MONTH~StateMod~9900540.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_001",TSID="WYD_001...MONTH~StateMod~WYD_001his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_002",TSID="WYD_002...MONTH~StateMod~WYD_002his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_003",TSID="WYD_003...MONTH~StateMod~WYD_003his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_004",TSID="WYD_004...MONTH~StateMod~WYD_004his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_005",TSID="WYD_005...MONTH~StateMod~WYD_005his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_006",TSID="WYD_006...MONTH~StateMod~WYD_006his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_007",TSID="WYD_007...MONTH~StateMod~WYD_007his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_008",TSID="WYD_008...MONTH~StateMod~WYD_008his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_009",TSID="WYD_009...MONTH~StateMod~WYD_009his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_010",TSID="WYD_010...MONTH~StateMod~WYD_010his.stm")
+SetDiversionHistoricalTSMonthly(ID="WYD_011",TSID="WYD_011...MONTH~StateMod~WYD_011his.stm")
+#
+# Future demands
+SetDiversionHistoricalTSMonthlyConstant(ID="44_FDP001",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="55_FDP001",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="56_FDP001",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="57_FDP001",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="57_NAG01",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="57_NMID01",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="57_NPWR01",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="58_FDP001",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="5804213_A",Constant=0)
+#
+# Future demands identified in the PnM or BIP modeling efforts.
+SetDiversionHistoricalTSMonthlyConstant(ID="4402029",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="4404325_D",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="5704204_D",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="5801869",Constant=0)
+SetDiversionHistoricalTSMonthlyConstant(ID="5801919",Constant=0)
+#
+#
+#  Step 7 - fill historical diversion using pattern approach
+#
+FillDiversionHistoricalTSMonthlyPattern(ID="*",PatternID="09239500")
+FillDiversionHistoricalTSMonthlyPattern(ID="55*",PatternID="09260000")
+FillDiversionHistoricalTSMonthlyPattern(ID="44*",PatternID="09251000")
+FillDiversionHistoricalTSMonthlyPattern(ID="56*",PatternID="09251000")
+FillDiversionHistoricalTSMonthlyPattern(ID="WYD_*",PatternID="09260000")
+FillDiversionHistoricalTSMonthlyPattern(ID="99*",PatternID="09260000")
+#
+#   Step 9 - Fill remaining missing with month average
+#
+FillDiversionHistoricalTSMonthlyAverage(ID="*")
+#
+#
+#   Step 10 - sort structures and create historical diversion file
+#
+SortDiversionHistoricalTSMonthly(Order=Ascending)
+WriteDiversionHistoricalTSMonthlyToStateMod(OutputFile="..\StateMod\ym2015.ddh")
+#
+#  Step 11 - update capacities and create intermediate direct diversion station file
+#
+SetDiversionStationCapacitiesFromTS(ID="*")
+WriteDiversionStationsToStateMod(OutputFile="ym2015_ddh.dds")

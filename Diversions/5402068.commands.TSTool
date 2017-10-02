@@ -1,0 +1,6 @@
+# 5402068 - STATE LINE WW DITCH
+5402068.DWR.DivTotal.Month~HydroBase
+ReplaceValue(TSList=AllMatchingTSID,TSID="5402068.DWR.DivTotal.Month",MinValue=10000,MaxValue=20000,Action=SetMissing)
+# Steve Malers removed reference to Google Drive
+# WriteStateMod(TSList=AllTS,OutputFile="C:\Google Drive\CDSS\ym2015\Diversions\5402068.stm",Precision=0)
+WriteStateMod(TSList=AllTS,OutputFile="5402068.stm",Precision=0)
