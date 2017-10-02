@@ -1,0 +1,46 @@
+# Lisa Wade @ WWG
+#
+# Historical diversions for wells identified in the Steamboat Springs Water Supply Plan
+# (Stantec 2008). These wells were added to the Yampa model in the Projects and Methods Model
+# developed by CDM Smith 2014. They represent current use.
+#
+# Lisa Wade - 2015 update - monthly well diversion volumes for October 2003 to
+#    September 2013 were collected from Mt. Werner Water and Sanitation District
+#    Operations Manager Jeff Peterson  970-879-2424 jpeterson@mwwater.com
+#    Wells G and H are measured together, so in this update, they are modeled as a single node.
+#
+# For the Baseline Demand, a monthly pattern representing current demand levels is used.
+#
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+NewPatternTimeSeries(Alias="5805055",NewTSID="5805055...Month",SetStart="10/1974",SetEnd="09/2013",Units="ACFT",PatternValues="0,0,0,0,0,0.1,0.2,0.4,11.2,43.8,39.1,16.6")
+NewPatternTimeSeries(Alias="5805059_D",NewTSID="5805059_D...Month",SetStart="10/1974",SetEnd="09/2013",Units="ACFT",PatternValues="6,0,0,0.3,0.6,17.7,12.8,14,15.4,45.9,40.3,16.4")
+NewPatternTimeSeries(Alias="5805066",NewTSID="5805066...Month",SetStart="10/1974",SetEnd="09/2013",Units="ACFT",PatternValues="73,65,77,88,77,89,62,86,118,165,145,123")
+#
+# Write to baseline.stm file
+WriteStateMod(TSList=AllTS,OutputFile="58_SteamboatWells_B.stm")
+#
+# For the Historical Demand, monthly pattern is replaced with observed diversions
+Free(TSList=AllMatchingTSID,TSID="5805059_D")
+Free(TSList=AllMatchingTSID,TSID="5805055")
+#
+# 5805066 - MT WERNER YAMPA DIVERSN
+5805066.DWR.DivTotal.Month~HydroBase
+SetFromTS(TSList=AllMatchingTSID,TSID="5805066",IndependentTSList=AllMatchingTSID,IndependentTSID="5805066.DWR.DivTotal.Month",TransferHow=ByDateTime,HandleMissingHow="IgnoreMissing")
+SetConstant(TSList=AllMatchingTSID,TSID="5805066",ConstantValue=0,SetEnd="09/1981")
+Free(TSList=AllMatchingTSID,TSID="5805066.DWR.DivTotal.Month")
+#
+# Read in values for Steamboat Well A and Mt. Werner Wells G and H
+# ReadTableFromExcel(TableID="FromMtW",InputFile="C:\Google Drive\CDSS\ym2015\Diversions\2003-2013 Yampa Well Usage.xlsx",Worksheet="For_TSTool",ExcelAddress="B3:F135",ExcelColumnNames=FirstRowInRange,ExcelDateTimeColumns="Date")
+ReadTableFromExcel(TableID="FromMtW",InputFile="2003-2013 Yampa Well Usage.xlsx",Worksheet="For_TSTool",ExcelAddress="B3:F135",ExcelColumnNames=FirstRowInRange,ExcelDateTimeColumns="Date")
+TableToTimeSeries(TableID="FromMtW",DateTimeColumn="Date",LocationID="5805055",ValueColumn="Well_A_af",DataSource="MtW",Interval=Month,Units="ACFT",Alias="%L-Recent")
+TableToTimeSeries(TableID="FromMtW",DateTimeColumn="Date",LocationID="5805059_D",ValueColumn="WellG&H_af",DataSource="MtW",Interval=Month,Units="ACFT",Alias="%L-Recent")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5805055-Recent",FillStart="10/1974")
+FillHistMonthAverage(TSList=AllMatchingTSID,TSID="5805059_D-Recent",FillStart="10/1974")
+SetConstant(TSList=AllMatchingTSID,TSID="5805055-Recent",ConstantValue=0,SetEnd="09/1974")
+SetConstant(TSList=AllMatchingTSID,TSID="5805059_D-Recent",ConstantValue=0,SetEnd="09/1974")
+#
+# Write to historical.stm file
+WriteStateMod(TSList=AllTS,OutputFile="58_SteamboatWells_H.stm")
+#
+#

@@ -1,0 +1,109 @@
+# Htar.commands.TSTool
+#
+# Set the maximum reservoir target end of month content equal to the historical observed
+# Set the minimum reservoir target end of month content equatl to zero.
+#
+#
+SetInputPeriod(InputStart="09/1908",InputEnd="10/2013")
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#
+# ELKHEAD RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="4403902.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="4403902.Max..Month",Units="ACFT",InitialValue=25656)
+# Milk Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="4404323.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="4404323.Max..Month",Units="ACFT",InitialValue=0)
+# 4404325 - Rampart Reservoir
+NewTimeSeries(Alias="%L",NewTSID="4404325.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="4404325.Max..Month",Units="ACFT",InitialValue=0)
+# Little Bear 1
+NewTimeSeries(Alias="%L",NewTSID="44_LBear1.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="44_LBear1.Max..Month",Units="ACFT",InitialValue=0)
+# Monument Butte
+NewTimeSeries(Alias="%L",NewTSID="44_MonButte.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="44_MonButte.Max..Month",Units="ACFT",InitialValue=0)
+# South Fork 2
+NewTimeSeries(Alias="%L",NewTSID="44_SFrk2.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="44_SFrk2.Max..Month",Units="ACFT",InitialValue=0)
+# 44_ARY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ARY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ARY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ARY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ASY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ASY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5404208 Pot Hook Dam
+NewTimeSeries(Alias="%L",NewTSID="5404208.Min..Month",Units="ACFT",InitialValue=0)
+5404208...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ARY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ARY003.Min..Month.",Units="ACFT",InitialValue=0)
+55_ARY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ASY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ASY003.Min..Month",Units="ACFT",InitialValue=0)
+55_ASY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5704204 - Peabody Trout Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="5704204.Min..Month",Units="ACFT",InitialValue=0)
+5704204...MONTH~StateMod~..\StateMod\ym2015.eom
+# ALLEN BASIN RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803500.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5803500.Max..Month",Units="ACFT",InitialValue=2250)
+# FISH CREEK RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803508.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5803508.Max..Month",Units="ACFT",InitialValue=4268)
+# LESTER CREEK RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803521.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5803521.Max..Month",Units="ACFT",InitialValue=5657)
+# STILLWATER RESERVOIR 1
+NewTimeSeries(Alias="%L",NewTSID="5803540.Min..Month",Units="ACFT",InitialValue=0)
+NewPatternTimeSeries(Alias="%L",NewTSID="5803540..Max.Month",Units="ACFT",PatternValues="3000,3000,3000,3000,3000,3000,3000,6000,6000,6000,-1,3000")
+# LAKE CATAMOUNT
+# Maximum target values are based on conversation with Joel A. Anderson, District Manager of Catamount Metro District on May 16, 2016.
+# Office (970)871-6989
+# Cell (970)846-3211
+# Email  joel@catamountmetro.org.
+NewTimeSeries(Alias="%L",NewTSID="5803631.Min..Month",Units="ACFT",InitialValue=0)
+NewPatternTimeSeries(Alias="5803631",NewTSID="5803631...Month",SetStart="10/1908",SetEnd="09/2013",Units="ACFT",PatternValues="-1,5200,5200,5200,5200,-1,7422,7422,7422,7422,7422,7422")
+# STEAMBOAT LAKE
+NewTimeSeries(Alias="%L",NewTSID="5803787.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5803787.Max..Month",Units="ACFT",InitialValue=26364)
+# Future Reservoir - 5803913 - Morrison Creek Reservoir
+NewTimeSeries(Alias="%L",NewTSID="5803913.Min..Month",Units="ACFT",InitialValue=0)
+5803913...MONTH~StateMod~..\StateMod\ym2015.eom
+# STAGECOACH RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5804213.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5804213.Max..Month",Units="ACFT",InitialValue=36460)
+# YAMCOLO RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5804240.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="5804240.Max..Month",Units="ACFT",InitialValue=9621)
+# Wyoming's Reservoirs
+# 9903000
+NewTimeSeries(Alias="%L",NewTSID="9903000.Min..Month",Units="ACFT",InitialValue=0)
+9903000...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903001
+NewTimeSeries(Alias="%L",NewTSID="9903001.Min..Month",Units="ACFT",InitialValue=0)
+9903001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903002 - High Savery
+NewTimeSeries(Alias="%L",NewTSID="9903002.Min..Month",Units="ACFT",InitialValue=0)
+NewTimeSeries(Alias="%L",NewTSID="9903002.Min..Month",Units="ACFT",InitialValue=22433)
+# 9903003
+NewTimeSeries(Alias="%L",NewTSID="9903003.Min..Month",Units="ACFT",InitialValue=0)
+9903003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903004
+NewTimeSeries(Alias="%L",NewTSID="9903004.Min..Month",Units="ACFT",InitialValue=0)
+9903004...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903005
+NewTimeSeries(Alias="%L",NewTSID="9903005.Min..Month",Units="ACFT",InitialValue=0)
+9903005...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903007
+NewTimeSeries(Alias="%L",NewTSID="9903007.Min..Month",Units="ACFT",InitialValue=0)
+9903007...MONTH~StateMod~..\StateMod\ym2015.eom
+#
+#
+WriteStateMod(TSList=AllTS,OutputFile="..\StateMod\ym2015B.tar",Precision=1)

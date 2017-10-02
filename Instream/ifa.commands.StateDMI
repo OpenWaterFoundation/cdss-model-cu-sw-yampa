@@ -1,0 +1,51 @@
+# ifa.commands.StateDMI
+#
+#  StateDMI command file to create the annual instream flow demand file for the Yampa model
+#
+SetOutputYearType(OutputYearType=Water)
+#
+#  Structures and total demands (rights) are defined in the instream flow rights file
+#
+ReadInstreamFlowRightsFromStateMod(InputFile="..\StateMod\ym2015.ifr")
+#
+#  Step 1 - Set monthly instream flow demand to water rights for structures that are of DemandType = 2 (*.dds)
+#
+SetInstreamFlowDemandTSAverageMonthlyFromRights(ID="*",IfNotFound=Add)
+#
+#
+#	StateDMI expects monthly values to be entered in Calendar Year.
+#
+#  Step 2 - Set monthly instream flow demands that vary by month
+#
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="4401448",MonthValues="14,14,14,14,30,30,30,30,30,14,14,14")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="4401451",MonthValues="8,8,8,8,15,15,15,15,15,8,8,8")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="4401452",MonthValues="10,10,10,10,20,20,20,20,20,10,10,10")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="4401454",MonthValues="0.5,0.5,0.5,1.5,1.5,1.5,1.5,0.75,0.75,0.75,0.75,0.5")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5601272",MonthValues="2,2,2,3.25,3.25,3.25,3.25,3.25,2,2,2,2")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5802404",MonthValues="5,5,5,5,12,12,12,12,12,5,5,5")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5809001",MonthValues="8.1,8.1,8.1,13.2,13.2,13.2,13.2,10.7,8.1,8.1,8.1,8.1")
+#
+# - ISF refinements 2009
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5802164",MonthValues="47.5,47.5,47.5,72.5,72.5,72.5,72.5,60,47.5,47.5,47.5,47.5")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="4401456",MonthValues="5,5,6.5,8,8,8,8,3.5,3.5,5,5,5")
+#
+# - Steamboat RICD month by month decreed water (Half day only by decree)
+# - LCW - updated to match the BIP model, which used values from a personal communication with Erin Light
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5802591",MonthValues="0,0,0,200,825,1025,175,47.5,0,0,0,0")
+#
+# Set targets for FERC min stream flow below Stagecoach Res LCW June 2015
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5804213_F2",MonthValues="0,0,0,0,0,0,0,20,20,20,20,0")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5804213_F4",MonthValues="40,40,40,40,40,40,40,40,40,40,40,40")
+#
+# Add Elkhead Flow Targets Per WFET Study meh 8/2013
+#
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="44_FishTar",MonthValues="169,169,0,0,0,0,138,120,120,120,169,169")
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="44_FishRch",MonthValues="169,169,0,0,0,0,138,120,120,120,169,169")
+#
+# Add Morrison Creek Reservoir Releases meh 8/2013
+#
+SetInstreamFlowDemandTSAverageMonthlyConstant(ID="5803913_MF",MonthValues="13,13,13,13,13,13,13,13,13,13,13,13")
+#
+#  Step 3 - Create StateMod file
+#
+WriteInstreamFlowDemandTSAverageMonthlyToStateMod(OutputFile="..\StateMod\ym2015.ifa")

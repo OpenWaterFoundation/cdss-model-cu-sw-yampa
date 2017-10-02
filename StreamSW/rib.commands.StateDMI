@@ -1,0 +1,67 @@
+# rib.commands.StateDMI
+#
+# Creates the Stream Estimate Station Coefficient Data file
+#
+#  Step 1 - read river nodes from the network file and create file framework
+#
+ReadStreamEstimateStationsFromNetwork(InputFile="..\Network\ym2015.net")
+#
+#  Step 2 - set preferred gages for "neighboring" gage approach
+#           this baseflow nodes are generally on smaller non-gaged tribs and have
+#           different flow characteristics than next downstream gages
+#
+# Use neighboring gage to push the flows to slightly later in the season (Walton Creek).
+SetStreamEstimateCoefficientsPFGage(ID="5800687",GageID="09238900")
+#
+# Use Neighboring gage on Soda Creek because we are dealing with negative gains btwn USGS gages
+SetStreamEstimateCoefficientsPFGage(ID="5802311",GageID="09238900")
+#
+# Use Neighboring gage on tributaries to Elk Creek to delay the melt slightly
+SetStreamEstimateCoefficientsPFGage(ID="5802304",GageID="09236000")
+SetStreamEstimateCoefficientsPFGage(ID="5802254",GageID="09236000")
+#
+# Use Neighboring gage for Trout and Fish Creek to be consistent
+#     with modeling done for Peabody energy Trout Creek Reservoir.
+SetStreamEstimateCoefficientsPFGage(ID="5701009",GageID="09241000")
+SetStreamEstimateCoefficientsPFGage(ID="5700612",GageID="09241000")
+SetStreamEstimateCoefficientsPFGage(ID="5700544",GageID="09241000")
+#
+# Using Neighboring gage on Elkhead Creek
+SetStreamEstimateCoefficientsPFGage(ID="4400533",GageID="09245500")
+#
+# Using Neighboring gage in Fortification/Little Bear Creek/Dry Cotton Creek Area
+SetStreamEstimateCoefficientsPFGage(ID="4400573",GageID="09245000")
+SetStreamEstimateCoefficientsPFGage(ID="4400785",GageID="09245000")
+SetStreamEstimateCoefficientsPFGage(ID="4400998",GageID="09245000")
+#
+# Using Neighboring gage in Milk Creek area
+SetStreamEstimateCoefficientsPFGage(ID="4400692",GageID="09249750")
+SetStreamEstimateCoefficientsPFGage(ID="4400518",GageID="09236000")
+SetStreamEstimateCoefficientsPFGage(ID="4400524",GageID="09249750")
+#
+# Using Neighboring gage in Williams Fork area
+SetStreamEstimateCoefficientsPFGage(ID="4401454",GageID="09249750")
+SetStreamEstimateCoefficientsPFGage(ID="4400726",GageID="09249750")
+SetStreamEstimateCoefficientsPFGage(ID="4400716",GageID="09249750")
+SetStreamEstimateCoefficientsPFGage(ID="4400644",GageID="09249750")
+#
+# Using Neighboring gage approach in Wyoming
+SetStreamEstimateCoefficientsPFGage(ID="WYD_009",GageID="09255500")
+#
+# Using Neighboring gage for Beaver Creek, Tributary to Green River
+SetStreamEstimateCoefficientsPFGage(ID="5601272",GageID="09241000")
+SetStreamEstimateCoefficientsPFGage(ID="56_ADY027",GageID="09241000")
+#
+#  Step 3 - calculate stream coefficients
+CalculateStreamEstimateCoefficients()
+# LCW - expecting warnings for the following gages that are set using the "neighboring" gage approach
+# 5800687
+# 56_ADY027
+#
+#  Step 4 - set proration factors directly
+SetStreamEstimateCoefficients(ID="WYD_006",ProrationFactor=1.0)
+#
+#
+#  Step 5 - create streamflow estimate coefficient file
+#
+WriteStreamEstimateCoefficientsToStateMod(OutputFile="..\StateMod\ym2015.rib")

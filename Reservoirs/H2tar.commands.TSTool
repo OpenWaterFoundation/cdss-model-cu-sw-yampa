@@ -1,0 +1,123 @@
+# H2tar.commands.TSTool
+#
+# Set the maximum reservoir target end of month content equal to the historical capacity
+# Set the minimum reservoir target end of month content equatl to zero.
+#
+#
+SetInputPeriod(InputStart="09/1908",InputEnd="10/2013")
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="09/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#
+# ELKHEAD RESERVOIR (enlarged in 2006, using historical eom prior)
+NewTimeSeries(Alias="%L",NewTSID="4403902.Min..Month",Units="ACFT",InitialValue=0)
+# smalers change to use local file
+# 4403902...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\StateMod\ym2015.eom
+4403902...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="4403902...MONTH",ConstantValue=25656,SetStart="01/2007")
+# Milk Creek Reservoir (IPP)
+NewTimeSeries(Alias="%L",NewTSID="4404323.Min..Month",Units="ACFT",InitialValue=0)
+4404323...MONTH~StateMod~..\StateMod\ym2015.eom
+# 4404325 - Rampart Reservoir (IPP)
+NewTimeSeries(Alias="%L",NewTSID="4404325.Min..Month",Units="ACFT",InitialValue=0)
+4404325...MONTH~StateMod~..\StateMod\ym2015.eom
+# Little Bear 1 (IPP)
+NewTimeSeries(Alias="%L",NewTSID="44_LBear1.Min..Month",Units="ACFT",InitialValue=0)
+44_LBear1...MONTH~StateMod~..\StateMod\ym2015.eom
+# Monument Butte (IPP)
+NewTimeSeries(Alias="%L",NewTSID="44_MonButte.Min..Month",Units="ACFT",InitialValue=0)
+44_MonButte...MONTH~StateMod~..\StateMod\ym2015.eom
+# South Fork 2 (IPP)
+NewTimeSeries(Alias="%L",NewTSID="44_SFrk2.Min..Month",Units="ACFT",InitialValue=0)
+44_SFrk2...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ARY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ARY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ARY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ARY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ARY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY001_YampaRbelCraig
+NewTimeSeries(Alias="%L",NewTSID="44_ASY001.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 44_ASY002_YampaR@Deerlodge
+NewTimeSeries(Alias="%L",NewTSID="44_ASY002.Min..Month",Units="ACFT",InitialValue=0)
+44_ASY002...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5404208 Pot Hook Dam (IPP)
+NewTimeSeries(Alias="%L",NewTSID="5404208.Min..Month",Units="ACFT",InitialValue=0)
+5404208...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ARY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ARY003.Min..Month.",Units="ACFT",InitialValue=0)
+55_ARY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 55_ASY003_LSnakeRnrLily
+NewTimeSeries(Alias="%L",NewTSID="55_ASY003.Min..Month",Units="ACFT",InitialValue=0)
+55_ASY003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 5704204 - Peabody Trout Creek Reservoir (IPP)
+NewTimeSeries(Alias="%L",NewTSID="5704204.Min..Month",Units="ACFT",InitialValue=0)
+5704204...MONTH~StateMod~..\StateMod\ym2015.eom
+# ALLEN BASIN RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5803500.Min..Month",Units="ACFT",InitialValue=0)
+5803500...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="5803500...MONTH",ConstantValue=2250,SetStart="04/1909")
+# FISH CREEK RESERVOIR (under construction from 08/1994 - 10/1996 to be enlarged)
+NewTimeSeries(Alias="%L",NewTSID="5803508.Min..Month",Units="ACFT",InitialValue=0)
+5803508...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="5803508...MONTH",ConstantValue=1842,SetStart="03/1956")
+SetConstant(TSList=LastMatchingTSID,TSID="5803508...MONTH",ConstantValue=0,SetStart="08/1994")
+SetConstant(TSList=LastMatchingTSID,TSID="5803508...MONTH",ConstantValue=4268,SetStart="10/1996")
+# LESTER CREEK RESERVOIR (historical operations not driven by downstream demands, using eom)
+NewTimeSeries(Alias="%L",NewTSID="5803521.Min..Month",Units="ACFT",InitialValue=0)
+5803521...MONTH~StateMod~..\StateMod\ym2015.eom
+# STILLWATER RESERVOIR 1
+NewTimeSeries(Alias="%L",NewTSID="5803540.Min..Month",Units="ACFT",InitialValue=0)
+NewPatternTimeSeries(Alias="%L",NewTSID="5803540..Max.Month",Units="ACFT",PatternValues="3000,3000,3000,3000,3000,3000,3000,6000,6000,6000,-1,3000")
+SetConstant(TSList=LastMatchingTSID,TSID="5803540",ConstantValue=0,SetEnd="03/1939")
+# LAKE CATAMOUNT (historical operations not driven by downstream demand, using drawdown curve)
+# Maximum target values are based on conversation with Joel A. Anderson, District Manager of Catamount Metro District on May 16, 2016.
+# Office (970)871-6989
+# Cell (970)846-3211
+# Email  joel@catamountmetro.org.
+NewTimeSeries(Alias="%L",NewTSID="5803631.Min..Month",Units="ACFT",InitialValue=0)
+NewPatternTimeSeries(Alias="5803631",NewTSID="5803631...Month",SetStart="10/1908",SetEnd="09/2013",Units="ACFT",PatternValues="-1,5200,5200,5200,5200,-1,7422,7422,7422,7422,7422,7422")
+SetConstant(TSList=LastMatchingTSID,TSID="5803631...MONTH",ConstantValue=0,SetEnd="01/1978")
+# STEAMBOAT LAKE
+NewTimeSeries(Alias="%L",NewTSID="5803787.Min..Month",Units="ACFT",InitialValue=0)
+5803787...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="5803787...MONTH",ConstantValue=25240,SetStart="04/1965")
+SetConstant(TSList=LastMatchingTSID,TSID="5803787...MONTH",ConstantValue=26364,SetStart="04/1993")
+# Future Reservoir - 5803913 - Morrison Creek Reservoir (IPP)
+NewTimeSeries(Alias="%L",NewTSID="5803913.Min..Month",Units="ACFT",InitialValue=0)
+5803913...MONTH~StateMod~..\StateMod\ym2015.eom
+# STAGECOACH RESERVOIR (historically released to hydropower, using EOM for target)
+NewTimeSeries(Alias="%L",NewTSID="5804213.Min..Month",Units="ACFT",InitialValue=0)
+5804213...MONTH~StateMod~..\StateMod\ym2015.eom
+# YAMCOLO RESERVOIR
+NewTimeSeries(Alias="%L",NewTSID="5804240.Min..Month",Units="ACFT",InitialValue=0)
+5804240...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="5804240...MONTH",ConstantValue=9096,SetStart="08/1980")
+SetConstant(TSList=LastMatchingTSID,TSID="5804240...MONTH",ConstantValue=9621,SetStart="03/1998")
+# Wyoming's Reservoirs
+# 9903000
+NewTimeSeries(Alias="%L",NewTSID="9903000.Min..Month",Units="ACFT",InitialValue=0)
+9903000...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903001
+NewTimeSeries(Alias="%L",NewTSID="9903001.Min..Month",Units="ACFT",InitialValue=0)
+9903001...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903002 - High Savery
+NewTimeSeries(Alias="%L",NewTSID="9903002.Min..Month",Units="ACFT",InitialValue=0)
+9903002...MONTH~StateMod~..\StateMod\ym2015.eom
+SetConstant(TSList=LastMatchingTSID,TSID="9903002...MONTH",ConstantValue=22433,SetStart="01/2004")
+# 9903003
+NewTimeSeries(Alias="%L",NewTSID="9903003.Min..Month",Units="ACFT",InitialValue=0)
+9903003...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903004
+NewTimeSeries(Alias="%L",NewTSID="9903004.Min..Month",Units="ACFT",InitialValue=0)
+9903004...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903005
+NewTimeSeries(Alias="%L",NewTSID="9903005.Min..Month",Units="ACFT",InitialValue=0)
+9903005...MONTH~StateMod~..\StateMod\ym2015.eom
+# 9903007
+NewTimeSeries(Alias="%L",NewTSID="9903007.Min..Month",Units="ACFT",InitialValue=0)
+9903007...MONTH~StateMod~..\StateMod\ym2015.eom
+#
+#
+WriteStateMod(TSList=AllTS,OutputFile="..\StateMod\ym2015H2.tar",Precision=1)

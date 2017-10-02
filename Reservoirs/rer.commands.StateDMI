@@ -1,0 +1,132 @@
+# rer.commands.StateDMI
+#
+# Creates the reservoir rights files for the Yampa River model
+#        ym2015.rer
+#        ym2015B.rer
+#
+# LCW - 5/2015 - Updated to include enhancements identified in the BIP effort.
+#
+#  Step 1 - read reservoirs from reservoir station file
+#
+ReadReservoirStationsFromStateMod(InputFile="..\StateMod\ym2015.res")
+#
+#  Step 2 - read reservoir rights from HyroBase
+#
+ReadReservoirRightsFromHydroBase(ID="*",OnOffDefault=1)
+#
+#  Step 3 - assign rights to specific accounts, if required
+#           assign rights not in hydrobase and free-river rights
+#
+# Elkhead Reservoir -  updated 6/15 - Set the pre-enlargement rights to fill the senior accounts
+SetReservoirRight(ID="4403902.01",StationID="ID",OnOff=1,AccountDist="-3",IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="4403902.02",StationID="ID",OnOff=1,AccountDist="-3",IfNotFound=Warn,IfFound=Set)
+# First fill and second fill conditional rights are set
+SetReservoirRight(ID="4403902.90",Name="Elkhead_Conditional",StationID="ID",AdministrationNumber=41126.00000,Decree=4945,OnOff=1,AccountDist="-3",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4403902.91",Name="Elkhead_Conditional",StationID="ID",AdministrationNumber=41126.00000,Decree=8754,OnOff=1,AccountDist="-3",RightType=1,FillType=2,IfNotFound=Add,IfFound=Set)
+# - enlargement rights are OFF until 2007 and are set to fill the enlargement accounts
+SetReservoirRight(ID="4403902.03",Name="Elkhead_ENLG",StationID="ID",AdministrationNumber=55806.00000,Decree=5000,OnOff=2007,AccountDist="4",IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="4403902.04",Name="Elkhead_ENLG",StationID="ID",AdministrationNumber=55806.00000,Decree=7000,OnOff=2007,AccountDist="5",IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4403902.93",Name="ELKHEAD_ENLG_Refill",StationID="ID",AdministrationNumber=55806.00001,Decree=1000,OnOff=2007,AccountDist="4",RightType=1,FillType=2,IfNotFound=Add,IfFound=Warn)
+#
+# Pot Hook Reservoir
+SetReservoirRight(ID="5404208.91",Name="POT HOOK RESERVOIR",StationID="ID",AdministrationNumber=99999.99999,Decree=0,OnOff=0,IfNotFound=Add,IfFound=Warn)
+#
+# Fish Creek Reservoir
+SetReservoirRight(ID="5803508.94",Name="FISH_CREEK_RES",StationID="ID",AdministrationNumber=47832.00000,Decree=2000,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="5803508.04",Name="FISH_CREEK_RES",StationID="ID",AdministrationNumber=51620.00000,Decree=200,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+# Steamboat Lake
+# Set rights to fill all accounts
+SetReservoirRight(ID="5803787*",StationID="ID",AccountDist="-2",IfNotFound=Warn,IfFound=Set)
+# meh 8/2013 - Per Bahman Hatami, the 145 AF storage right filling the
+#              Conservation Pool in Streamboat has expired, thus this
+#              needs to be turned off.
+# LCW 6/2015 - The 145 acft right is no longer getting pulled from Hydrobase.
+# meh 8/2013 - Per Bahman Hatami, 3155 AF storage right fills the account
+#              used for releases to ISFs (account 3).
+SetReservoirRight(ID="5803787.13",Name="Steamboat Lake",StationID="ID",AdministrationNumber=53301.0000,Decree=3155,OnOff=1,AccountDist="3",IfNotFound=Add,IfFound=Set)
+#
+# Stillwater Reservoir
+SetReservoirRight(ID="5803540.01",StationID="ID",AccountDist="-8",IfNotFound=Warn,IfFound=Set)
+# LCW - adding a free river right allows the reservoir to fill more often in the calibration period (1975 - 2013)
+SetReservoirRight(ID="5803540.02",StationID="ID",AdministrationNumber=99999.99999,Decree=9999,AccountDist="-8",IfNotFound=Add,IfFound=Set)
+#
+# Lake Catamount
+SetReservoirRight(ID="5803631.02",StationID="ID",FillType=2,IfNotFound=Warn,IfFound=Set)
+#
+# Stagecoach Reservoir
+# Set the Stagecoach rights to fill the bookover account (LCW 6/2015)
+SetReservoirRight(ID="5804213*",StationID="ID",AccountDist="8",IfNotFound=Warn,IfFound=Set)
+# -- Second fill junior right
+SetReservoirRight(ID="5804213.07",StationID="ID",AccountDist="8",FillType=2,IfNotFound=Warn,IfFound=Set)
+# -- Conditional made absolute
+SetReservoirRight(ID="5804213.98",Name="STAGECOACH RESERVOIR",StationID="ID",AdministrationNumber=41727.39991,Decree=20854,OnOff=1,AccountDist="8",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+# Yamcolo Reservoir
+# Set the Yamcolo rights to fille the bookover account (LCW 6/2015)
+SetReservoirRight(ID="5804240.01",StationID="ID",OnOff=1,AccountDist="6",FillType=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="5804240.02",StationID="ID",OnOff=1,AccountDist="6",FillType=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="5804240.03",StationID="ID",OnOff=1,AccountDist="6",FillType=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="5804240.04",StationID="ID",OnOff=1,AccountDist="6",FillType=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="5804240.97",Name="YAMCOLO_RES_PLEASANTVRES",StationID="ID",AdministrationNumber=41727.39991,Decree=2500,OnOff=1,AccountDist="6",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+#    set rights for reservoirs and stock pond to capacity with senior water right
+#
+SetReservoirRight(ID="44_ARY001.01",Name="44_ARY001_YampaRbelCraig",StationID="ID",AdministrationNumber=1.00000,Decree=23206,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="44_ASY001.01",Name="44_ASY001_YampaRbelCraig",StationID="ID",AdministrationNumber=1.00000,Decree=8344,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="44_ARY002.01",Name="44_ARY002_YampaR@Deerlodge",StationID="ID",AdministrationNumber=1.00000,Decree=9122,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="44_ASY002.01",Name="44_ASY002_YampaR@Deerlodge",StationID="ID",AdministrationNumber=1.00000,Decree=4441,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="55_ARY003.01",Name="55_ARY003_LSnakeRnrLily",StationID="ID",AdministrationNumber=1.00000,Decree=1494,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="55_ASY003.01",Name="55_ASY003_LSnakeRnrLily",StationID="ID",AdministrationNumber=1.00000,Decree=3173,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+#    set rights for Wyoming reservoirs
+#
+SetReservoirRight(ID="9903000.01",Name="9903000_Wyo_above",StationID="ID",AdministrationNumber=1.00000,Decree=860,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903001.01",Name="9903001_Wyo_below",StationID="ID",AdministrationNumber=1.00000,Decree=390,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903002.01",Name="9903002_Wyo_Savory",StationID="ID",AdministrationNumber=55801.00000,Decree=22433,OnOff=2004,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903003.01",Name="9903003_Wyo_dikes",StationID="ID",AdministrationNumber=1.00000,Decree=570,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903004.01",Name="9903004_Wyo_stock",StationID="ID",AdministrationNumber=1.00000,Decree=290,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903005.01",Name="9903005_Wyo_new",StationID="ID",AdministrationNumber=99999.99999,Decree=16000,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+#     Set rights for future or planned reservoirs
+#     The target end of month content is set to zero
+SetReservoirRight(ID="5704204.01",Name="Peabody_Trout_Creek_Res",StationID="ID",AdministrationNumber=43575.00000,Decree=15000,OnOff=0,AccountDist="-2",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="5803913.01",Name="Morrison_Crk_Res",StationID="ID",AdministrationNumber=41727.39991,Decree=4965,OnOff=0,AccountDist="-2",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="5803913.02",Name="Morrison_Crk_Res",StationID="ID",AdministrationNumber=57676.0000,Decree=5655,OnOff=0,AccountDist="3",RightType=1,FillType=2,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4404323.01",Name="MilkCrk_Res",StationID="ID",AdministrationNumber=45923.00000,Decree=35000,OnOff=0,AccountDist="-3",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4404323.02",Name="MilkCrk_Res",StationID="ID",AdministrationNumber=99990.00000,Decree=35000,OnOff=0,AccountDist="-3",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4404325.01",Name="Rampart_Res",StationID="ID",AdministrationNumber=41126.00000,Decree=12133.3,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="4404325.02",Name="Rampart_Res",StationID="ID",AdministrationNumber=47905.00000,Decree=11692,OnOff=0,AccountDist="1",RightType=1,FillType=2,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="44_SFrk2.01",Name="South Fork 2",StationID="ID",AdministrationNumber=99990.00000,Decree=1700,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="44_MonButte.01",Name="Monument Butte",StationID="ID",AdministrationNumber=99990.00000,Decree=4390,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+SetReservoirRight(ID="44_LBear1.01",Name="Little Bear",StationID="ID",AdministrationNumber=99990.00000,Decree=800,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+SetReservoirRight(ID="9903007.01",Name="9903007_Upper_Willow_Ck_S",StationID="ID",AdministrationNumber=99999.99999,Decree=0,OnOff=0,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Warn)
+#
+#
+#  Step 4 - create output for Historic and Calculated datasets
+#
+WriteReservoirRightsToStateMod(OutputFile="..\StateMod\ym2015.rer")
+#
+#
+# Step 5 - Update Reservoirs for Baseline dataset
+# Set water rights to be for the full period of record
+#
+# Elkhead enlargement
+# meh 8/12 Accounts changed to reflect added Craig Conservation pool
+SetReservoirRight(ID="4403902.03",StationID="ID",OnOff=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="4403902.04",StationID="ID",OnOff=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="4403902.90",StationID="ID",OnOff=1,IfNotFound=Warn,IfFound=Set)
+SetReservoirRight(ID="4403902.93",StationID="ID",OnOff=1,IfNotFound=Warn,IfFound=Set)
+#
+# Enlarge Wyoming Dikes
+SetReservoirRight(ID="9903003.01",Name="9903003_Wyo_dikes",StationID="ID",AdministrationNumber=1.00000,Decree=1284,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Warn,IfFound=Set)
+#
+# High Savory, Wyoming
+SetReservoirRight(ID="9903002.01",Name="9903002_Wyo_Savory",StationID="ID",AdministrationNumber=55801.00000,Decree=22433,OnOff=1,AccountDist="1",RightType=1,FillType=1,IfNotFound=Add,IfFound=Set)
+#
+#
+#  Step 6 - create output for Baseline dataset
+#
+WriteReservoirRightsToStateMod(OutputFile="..\StateMod\ym2015B.rer")
+#
+#

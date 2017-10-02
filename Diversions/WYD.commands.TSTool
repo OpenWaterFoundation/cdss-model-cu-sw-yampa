@@ -1,0 +1,371 @@
+# COMBINED WYOMING STRUCTURES 9900528H, 9900539, 9905040, WYD_001, WYD_002, WYD_003, WYD_004, WYD_005, WYD_006, WYD_007, WYD_008, WYD_009, WYD_010, WYD_011
+#
+# Command file name: "C:\CDSS\Data\ym2015\ym2015\Diversions\9900528.TSTool"
+# Commands:
+# #
+# # Lisa Wade @ Wilson Water Group
+# #
+# # Extending the POR for Cheyenne diversions
+# #
+# # Information comes from 1 sources. The first is the previous CRWAS model (ym2009)
+# # The second is from the Little Snake Supplement Storage project. Notes from their stm file:
+# # "# CHEYENNE - 1971 to 1998 values came from spreadsheets provided by StatesWest to Boyle under the Green River Basin Plan
+# #   Historical diversions to Cheyenne project
+# #
+# # 1999 to 2008 data copied from monthly summary of daily records from Herman Noe
+# #     Diversions in Oct - Dec 1998, Nov 2000, Aug 2001, and Aug 2008 unknown. These months filled with zeroes."
+# #
+# # Raw data pasted at the top.
+# ## Yr                 OCT     NOV     DEC     JAN     FEB     MAR     APR     MAY     JUN     JUL     AUG    SEPT   TOTAL
+# # 10/1969  -      9/2009 ACFT  WYR
+# # 1970 9900528        -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.
+# # 1971 9900528         259.    165.    155.    155.    140.    155.    396.    441.    592.   1620.    295.    123.   4496.
+# # 1972 9900528         117.    120.    124.    124.    100.     93.    199.   2217.   3138.    630.    199.    132.   7193.
+# # 1973 9900528         124.    120.    124.    124.    112.    124.    138.   2277.   3141.   1312.    342.    186.   8124.
+# # 1974 9900528         155.    150.    155.    155.    140.    155.    266.   2548.   2118.    851.    189.     82.   6964.
+# # 1975 9900528          99.     86.     61.     64.     56.     62.    108.   1104.   1911.   1123.    303.     99.   5076.
+# # 1976 9900528          88.     74.     70.     93.     87.     89.    159.   2255.   3261.   1123.    218.    107.   7624.
+# # 1977 9900528         104.     73.     58.     62.     56.     62.    335.   2053.   1565.      7.      2.      0.   4377.
+# # 1978 9900528          31.     94.     92.     93.     58.     42.    196.   1421.   2598.   1855.    335.    120.   6935.
+# # 1979 9900528         104.     81.     83.     77.     53.     31.    207.   1834.   3605.   1696.    340.    100.   8211.
+# # 1980 9900528          71.     64.     68.     64.     63.     67.    278.   2040.   3644.   1160.    126.     82.   7727.
+# # 1981 9900528         113.     66.     34.     34.     25.     28.    499.   1905.   2127.    365.    157.     99.   5452.
+# # 1982 9900528         193.    186.    156.    106.     51.     52.    169.   1879.   3860.   2304.    361.    264.   9581.
+# # 1983 9900528         445.    286.    222.    144.    109.    120.    161.   1513.   1604.    423.      0.      0.   5027.
+# # 1984 9900528           0.     73.     96.     44.      7.    105.    222.   1066.    857.     10.      0.      0.   2480.
+# # 1985 9900528           0.      0.      0.      0.    140.    248.   1056.   4339.   4001.      0.      0.      0.   9784.
+# # 1986 9900528           0.    113.     93.     93.     69.     69.    257.   4306.   7027.     47.     31.     38.  12143.
+# # 1987 9900528          98.    120.    124.    124.    112.    124.    568.   5742.   1165.     38.     62.     60.   8337.
+# # 1988 9900528          60.    167.    187.    186.    174.    139.    291.   2599.   2919.    306.     12.      0.   7040.
+# # 1989 9900528           0.      0.      0.      0.      0.      0.    805.   6513.   5025.    146.      6.      0.  12495.
+# # 1990 9900528           0.      0.      0.      0.      0.      0.    327.   3559.   9189.    744.     45.     30.  13894.
+# # 1991 9900528          31.     30.     31.     31.     28.     31.     58.   6735.   9338.     88.     31.     30.  16462.
+# # 1992 9900528          31.     30.     31.     31.     29.     31.    640.   9371.   2221.      0.     15.     20.  12450.
+# # 1993 9900528          21.     30.     31.     31.     28.     31.     45.   5672.  13443.   4068.     62.     60.  23522.
+# # 1994 9900528          62.     60.     62.     62.     56.     62.    958.   9278.   3473.     32.      0.      0.  14105.
+# # 1995 9900528           0.     48.     62.     62.     20.     16.    145.   1747.   9980.     48.      8.      8.  12144.
+# # 1996 9900528           7.      3.      3.      3.      3.      3.    201.   5151.  10803.    827.      5.      3.  17012.
+# # 1997 9900528           0.      0.      0.      0.      0.      0.     89.   5499.   8266.    241.     24.      0.  14119.
+# # 1998 9900528           0.      0.      0.      0.      0.      0.     82.   6683.   7343.    730.     29.      2.  14869.
+# # 1999 9900528           0.      0.      0.      0.      0.      0.     77.   4921.   6557.   1687.      3.      3.   -999.
+# # 2000 9900528           0.      0.      0.      0.      0.      0.    366.   9290.   5668.      0.      0.      0.   -999.
+# # 2001 9900528           2.      0.     62.      4.      0.      0.    295.   7843.   4348.      0.      0.      0.   -999.
+# # 2002 9900528           0.      0.      0.      0.      0.      0.    368.   5800.    480.     20.      0.      0.   -999.
+# # 2003 9900528           0.      0.      0.      0.      0.      0.    405.   7212.   9109.     19.      0.      0.   -999.
+# # 2004 9900528           0.      0.      0.      0.      0.     66.    828.   7581.   5027.      0.      0.      0.   -999.
+# # 2005 9900528           0.      0.      0.      0.      0.      0.    487.   6561.   9593.    813.      0.      0.   -999.
+# # 2006 9900528           0.      0.      0.      0.      0.      0.    675.   9603.   6602.      0.      0.      0.   -999.
+# # 2007 9900528          34.      0.      0.      0.      0.     36.    589.   7470.   3932.      0.      0.      0.   -999.
+# # 2008 9900528          34.      0.      0.      0.      0.      0.      0.   5030.  12482.      0.      0.      0.   -999.
+# # 2009 9900528           0.      0.      0.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.   -999.
+# #
+# ReadStateMod(InputFile="C:\CDSS\Data\ym2015\Diversions\9900528_original.stm",Alias="%L-orig")
+# ReadStateMod(InputFile="C:\CDSS\Data\Wyoming\Little_Snake\LevelII_Model\Diversions\Cheyenne.stm",Alias="%L-new")
+# #
+# NewTimeSeries(Alias="9900528",NewTSID="9900528...Month",SetStart="10/1970",SetEnd="09/2009",Units="ACFT")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900528",IndependentTSList=AllMatchingTSID,IndependentTSID="9900528-orig")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900528",IndependentTSList=AllMatchingTSID,IndependentTSID="9900528-new")
+# SetOutputPeriod(OutputStart="10/1971",OutputEnd="09/2009")
+# SetOutputYearType(OutputYearType=Water)
+# #
+# WriteStateMod(TSList=AllMatchingTSID,TSID="9900528",OutputFile="9900528H.stm",Precision=0)
+# #
+# NewStatisticTimeSeries(TSID="9900528",Alias="9900528-Mean",NewTSID="9900528...Month.Mean",Statistic=Mean)
+# #
+# WriteStateMod(TSList=AllMatchingTSID,TSID="9900528-Mean",OutputFile="9900528_Baseline.stm",Precision=0)
+#
+# -----------------------------------------------------------------------------
+#
+# Command file name: "C:\CDSS\Data\ym2015\ym2015\Diversions\1stMesa_combine.TSTool"
+# Commands:
+# #
+# # Lisa Wade at Wilson Water Group
+# # 6/2015
+# #
+# # 1st Mesa Ditch diversion data comes from 2 sources:
+# # 1. Little Snake Water Supplemental Water project
+# # 2. Wyoming State Engineer Office.
+# # Details on each source are outlined below.
+# #
+# #
+# # 1. Little Snake Supplemental Water Supply project
+# # The header from the original file is copied below
+# #
+# #                Index Gage:                                                                                               Year Class
+# #                  OCT     NOV     DEC     JAN     FEB     MAR     APR     MAY     JUN     JUL     AUG     SEP     TOTAL    09253000
+# #            1971                                                                                                             Wet
+# #            1972                                                                                                            Normal
+# #            1973                                                                                                            Normal
+# #            1974                                                                                                             Wet
+# #            1975                                                                                                            Normal
+# #            1976                                                                                                            Normal
+# #            1977                                                                                                             Dry
+# #            1978                                                                                                             Wet
+# #            1979                                                                                                            Normal
+# #            1980                                                                                                            Normal
+# #            1981                                                                                                            Normal
+# #            1982                                                                                                             Wet
+# #            1983                                                          584.75 4619.31 3333.24 2144.07 2152.26  12833.63   Wet
+# #            1984                                                            0.00 4235.50 3924.14 2391.25    0.00  10550.89   Wet
+# #            1985                                                         3613.63 4798.41 3742.75 1518.74  912.20  14585.73  Normal
+# #            1986                                                         3823.91 6307.44 3346.16  573.06    0.00  14050.57   Wet
+# #            1987                                                         5129.91 4099.24 2176.05  938.30  657.52  13001.02   Dry
+# #            1988                                                         3882.33 6377.06 2971.70  591.51    0.00  13822.60  Normal
+# #            1989                                                         8269.47 6397.29 1824.95  592.13    0.00  17083.84   Dry
+# #            1990                                                         5358.64 5455.93 4284.46  734.16    0.00  15833.19   Dry
+# #            1991                                                         5428.13 5646.94 3010.43  728.63    0.00  14814.13  Normal
+# #            1992                                                         5381.40 2800.86    0.00    0.00    0.00   8182.26   Dry
+# #            1993                                                         1460.33 4669.29 3586.57 2610.76 1981.49  14308.44  Normal
+# #            1994                                                         4468.92 3836.83 1311.53  748.30  389.75  10755.33   Dry
+# #            1995                                                         1475.70 3939.17 4375.46 2969.24 1981.49  14741.06  Normal
+# #            1996    0.00                                          247.94 4093.84 5050.12 4234.65 2249.22 2624.13  18499.90  Normal
+# #            1997   55.74                                           93.22 3440.23 4877.55 3161.69 2536.98 1517.36  15682.77   Wet
+# #            1998  890.59                                           65.46 3268.81 5978.27 3776.58 2120.36 3276.74  19376.81  Normal
+# #            1999 1967.63                                           75.37 1301.18 6178.60 4984.54 3651.62 1713.74  19872.68  Normal
+# #            2000  515.71                                          117.03 4260.56 5426.86 3826.17  555.38  329.26  15030.97  Normal
+# #            2001  495.88                                          232.07 4000.72 5288.01 2324.66  610.92  321.33  13273.59  Normal
+# #            2002  916.38                                          858.86 5716.45 4548.17  712.08  166.61  184.47  13103.02   Dry
+# #            2003    0.00                                          313.39 4942.88 5240.41 2560.70  497.86  801.33  14356.57  Normal
+# #            2004    0.00                                         1493.58 5593.47 6057.61 2772.93  599.02  585.13  17101.74   Dry
+# #            2005    0.00                                          333.23 3923.36 6055.63 3459.22 3336.25 1856.56  18964.25  Normal
+# #            2006    0.00                                            0.00 5059.91 5662.89 2642.02 2872.11  900.51  17137.44  Normal
+# #            2007    0.00                                            0.00 3118.06 6172.65 2084.66 3538.56  862.82  15776.75  Normal
+# #
+# #    Average       403.49 #DIV/0! #DIV/0! #DIV/0! #DIV/0! #DIV/0!  319.18 3903.86 5188.80 2977.09 1571.00  921.92  14909.57
+# #
+# #    Wet            55.74    0.00    0.00    0.00    0.00    0.00   93.22 1962.22 5009.95 3441.31 1911.34  917.41  13279.47
+# #    Normal        429.98    0.00    0.00    0.00    0.00    0.00  153.83 3559.25 5463.17 3398.58 1989.37 1254.40  16040.07
+# #    Dry           458.19    0.00    0.00    0.00    0.00    0.00 1176.22 5702.61 4742.28 1868.86  539.79  259.55  13580.06
+# #
+# ReadStateMod(InputFile="C:\CDSS\Data\ym2015\Diversions\First_Mesa_Filled.stm")
+# #
+# # 2. Wyoming State Engineer Office
+# # Wyoming State Engineer Office has established a gage on the West Side Canal.
+# # Data is available starting in 2012.
+# # Additional data will be available from their website: http://seoflow.wyo.gov/
+# # gage ID = 0108FMC
+# #
+# # This command file reads in the raw flow data (downloaded on 6/12/2015) and
+# # converts to monthly volume
+# SetInputPeriod(InputStart="03/01/2012",InputEnd="11/01/2013")
+# #
+# ReadDelimitedFile(InputFile="9900539_SEO.csv",Delimiter=",",ColumnNames="Time,Value,Grade Code,Interpolation Type",DateTimeColumn="Time",ValueColumn="Value",SkipRowsAfterComments="1",LocationID="9900539",Provider="WyomingSEO",Interval=15Minute,Units="cfs")
+# FillInterpolate(TSList=AllMatchingTSID,TSID="9900539.WyomingSEO.Value.15Minute",MaxIntervals=300)
+# FillConstant(TSList=AllMatchingTSID,TSID="9900539.WyomingSEO.Value.15Minute",ConstantValue=0)
+# ChangeInterval(TSList=AllMatchingTSID,TSID="9900539.WyomingSEO.Value.15Minute",Alias="9900539_Day",NewInterval=Day,OldTimeScale=MEAN,NewTimeScale=MEAN)
+# ChangeInterval(TSList=AllMatchingTSID,TSID="9900539_Day",Alias="9900539_Month",NewInterval=Month,OldTimeScale=MEAN,NewTimeScale=ACCM)
+# Scale(TSList=AllMatchingTSID,TSID="9900539_Month",ScaleValue=1.9835,NewUnits="ACFT")
+# #
+# # Combine the data from the two sources into a single time series
+# NewTimeSeries(Alias="9900539",NewTSID="9900539...Month",SetStart="01/1970",SetEnd="12/2013",Units="ACFT")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900539",IndependentTSList=AllMatchingTSID,IndependentTSID="0800215_DS...MONTH")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900539",IndependentTSList=AllMatchingTSID,IndependentTSID="9900539_Month")
+# #
+# #
+# # Write out the time series to 9900539.stm
+# WriteStateMod(TSList=AllMatchingTSID,TSID="9900539",OutputFile="9900539.stm")
+# #
+# #
+#
+# -----------------------------------------------------------------------------
+# Command file name: "C:\CDSS\Data\ym2015\ym2015\Diversions\WestSide_SEO.TSTool"
+# Commands:
+# #
+# # Lisa Wade @ Wilson Water Group
+# # 6/2015
+# #
+# # Data for the Wyoming West Side Canal (9900540) is collected from 2 sources:
+# # Source 1 = Little Snake Supplemental Supply Project
+# # Source 2 = Wyoming State Engineer Office.
+# # Details for each source are displayed below
+# #
+# # Source 1: Little Snake Supplemental Storage project files
+# # RAW DATA COPIED INTO HEADER
+# #
+# #    Diversion Name:     West Side Canal
+# #    Diversion No. :
+# #
+# #
+# #    Filled data is shaded
+# #                Index Gage:                                                                                               Year Class
+# #                    OCT     NOV     DEC     JAN     FEB     MAR     APR     MAY     JUN     JUL     AUG     SEP     TOTAL  09253000
+# #    1971                                                                                                                     Wet
+# #    1972                                                                                                                    Normal
+# #    1973                                                                                                                    Normal
+# #    1974                                                                                                                     Wet
+# #    1975                                                                                                                    Normal
+# #    1976                                                                                                                    Normal
+# #    1977                                                                                                                     Dry
+# #    1978                                                                                                                     Wet
+# #    1979                                                                                                                    Normal
+# #    1980                                                                                                                    Normal
+# #    1981                                                                                                                    Normal
+# #    1982                                                                                                                     Wet
+# #    1983                                                                  2529.0  7978.9  6632.1  2598.5  1685.2  21423.58   Wet
+# #    1984                                                                                          2741.7     0.0   2741.73   Wet
+# #    1985                                                                  2861.0 13121.3  8152.0  1924.0  1073.5  27131.71  Normal
+# #    1986                                                                  4441.9 12565.5  8391.8  1433.3     0.0  26832.46   Wet
+# #    1987                                                                 11468.7  9453.4  2264.0  1459.1  1480.5  26125.62   Dry
+# #    1988                                                                  6026.4 12154.9  3172.8   731.7          22085.77  Normal
+# #    1989                                                                  9616.1  9661.1  2936.7  1248.2     0.0  23461.99   Dry
+# #    1990                                                                 10395.7  9899.1  3771.9                  24066.75   Dry
+# #    1991                                                                  6226.9  9299.3  4157.8     0.0     0.0  19683.95  Normal
+# #    1992                                                                  7217.4  4871.6     0.0     0.0     0.0  12089.01   Dry
+# #    1993                                                                  1460.3  4669.3  3586.6  2610.8   552.2  12879.15  Normal
+# #    1994                                                                  7729.6  7376.1  1652.2   718.8   317.2  17793.86   Dry
+# #    1995                                                                   424.5  7682.0  7382.5  4216.9  2358.4  22064.13  Normal
+# #    1996           174.6                                             0.0  5141.4  9165.8  4811.9  1920.0  1434.1  22647.61  Normal
+# #    1997          1390.4                                             0.0  4819.2  8187.9  6317.5  3310.5  2312.8  26338.23   Wet
+# #    1998           638.7                                             0.0  5456.6  8372.2  6174.6  2398.0  2205.7  25245.84  Normal
+# #    1999          1332.9                                             0.0  2027.1  9290.7  6210.3  3685.3  2616.2  25162.68  Normal
+# #    2000           311.4                                           791.4  7664.2  9088.4  2800.7   765.6   991.8  22413.55  Normal
+# #    2001           835.1                                             0.0  6549.5  8699.6  2713.4  1053.2   956.1  20806.92  Normal
+# #    2002          1059.2                                           733.9  9266.9  6972.0   642.7   200.3   339.2  19214.16   Dry
+# #    2003             0.0                                                  6628.0  8400.0  3470.0   400.0   723.0  19621.00  Normal
+# #    2004             0.0                                           212.2  9949.2 10028.6  4240.7  1533.3  1977.6  27941.57   Dry
+# #    2005             0.0                                             0.0  5370.0  6360.0  3440.0  3380.0  3380.0  21930.00  Normal
+# #    2006                                                             0.0  5914.8  9255.0  3883.7  5113.5  2132.3  26299.22  Normal
+# #    2007             0.0                                             0.0  7422.3  9399.8  4228.8  4708.8  1596.7  27356.44  Normal
+# #
+# #    Average       522.02 #DIV/0! #DIV/0! #DIV/0! #DIV/0! #DIV/0!  157.96 6108.61 8831.35 4209.77 2006.31 1223.13  21734.28
+# #
+# #    Wet          1390.43    0.00    0.00    0.00    0.00    0.00    0.00 3930.03 9577.43 7113.78 2520.99  999.48  19334.00
+# #    Normal        411.58    0.00    0.00    0.00    0.00    0.00   98.93 4940.93 8925.59 4584.65 2350.56 1539.98  22523.43
+# #    Dry           529.60    0.00    0.00    0.00    0.00    0.00  473.07 9377.66 8323.13 2215.44  859.95  685.73  21527.57
+# ReadStateMod(InputFile="C:\CDSS\Data\ym2015\Diversions\Westside_Filled.stm",Alias="%L-early")
+# #
+# # Source 2: Wyoming State Engineer Office
+# # Wyoming State Engineer Office has established a gage on the West Side Canal.
+# # Data is available starting in 2012.
+# # Additional data will be available from their website: http://seoflow.wyo.gov/
+# # gage ID = 0108WSC
+# #
+# # This command file reads in the raw flow data (downloaded on 6/12/2015) and
+# # converts to monthly volume
+# SetInputPeriod(InputStart="03/01/2012",InputEnd="11/01/2013")
+# #
+# ReadDelimitedFile(InputFile="C:\CDSS\Data\ym2015\Diversions\9900540_SEO.csv",Delimiter=",",ColumnNames="Time,Value,Grade Code,Interpolation Type",DateTimeColumn="Time",ValueColumn="Value",SkipRowsAfterComments="1",LocationID="9900540",Provider="WyomingSEO",Interval=15Minute,Units="cfs")
+# FillInterpolate(TSList=AllMatchingTSID,TSID="9900540.WyomingSEO.Value.15Minute",MaxIntervals=300)
+# FillConstant(TSList=AllMatchingTSID,TSID="9900540.WyomingSEO.Value.15Minute",ConstantValue=0)
+# ChangeInterval(TSList=AllMatchingTSID,TSID="9900540.WyomingSEO.Value.15Minute",Alias="9900540_Day",NewInterval=Day,OldTimeScale=MEAN,NewTimeScale=MEAN)
+# ChangeInterval(TSList=AllMatchingTSID,TSID="9900540_Day",Alias="9900540_Month",NewInterval=Month,OldTimeScale=MEAN,NewTimeScale=ACCM)
+# Scale(TSList=AllMatchingTSID,TSID="9900540_Month",ScaleValue=1.9835,NewUnits="ACFT")
+# #
+# # Combine the data from the two sources into a single time series
+# NewTimeSeries(Alias="9900540",NewTSID="9900540...Month",SetStart="01/1983",SetEnd="12/2013",Units="ACFT")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900540",IndependentTSList=AllMatchingTSID,IndependentTSID="9900540_DS-early")
+# FillFromTS(TSList=AllMatchingTSID,TSID="9900540",IndependentTSList=AllMatchingTSID,IndependentTSID="9900540_Month")
+# #
+# #
+# # Write out the time series to 9900540.stm
+# WriteStateMod(TSList=AllMatchingTSID,TSID="9900540",OutputFile="9900540.stm")
+#
+# -----------------------------------------------------------------------------
+#    WYD_001-007 & 009-011
+#     Historical diversions calculated by dividing irrigation water demand by system efficiencies.
+#     Efficiencies:    APR     May     June     July     August     Sept
+#                      .19     .23      .24      .55       .55       .55
+#       A,M,J efficiencies from average Dist 54 monthly efficiencies
+#
+# 	WYD_008
+#     BAGGS & DIXON - developed from GRBP memo Basin Use Profile - Municipal; current monthly depletions for Baggs and Dixon
+#      divided by their respective annual efficiencies, then summed. Negative net depletion for Baggs (-.65) per memo set to
+#      zero. No historical information available.
+#
+# -------------------------------------------------------------------------------
+# File generated by...
+# program:      TSTool 11.06.01 (2015-07-29)
+# user:         CTS
+# date:         Thu May 26 11:47:40 MDT 2016
+# host:         Katie
+# directory:    C:\Google Drive\CDSS\ym2015\Diversions
+# command line: TSTool
+#
+#
+# -----------------------------------------------------------------------
+# Command file name: "C:\Google Drive\CDSS\ym2015\Diversions\WYD.commands.TSTool"
+# Commands:
+# 9900528...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990528H.stm
+# 9900539...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990539.stm
+# 9900540...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990540.stm
+# WYD_001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_001his.stm
+# WYD_002...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_002his.stm
+# WYD_003...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_003his.stm
+# WYD_004...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_004his.stm
+# WYD_005...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_005his.stm
+# WYD_006...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_006his.stm
+# WYD_007...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_007his.stm
+# WYD_008...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_008his.stm
+# WYD_009...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_009his.stm
+# WYD_010...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_010his.stm
+# WYD_011...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_011his.stm
+# WriteStateMod(TSList=AllTS,OutputFile="C:\Google Drive\CDSS\ym2015\Diversions\WYD.stm",Precision=0)
+#
+# -----------------------------------------------------------------------------
+# HydroBase database is: HydroBase_CO_20150304 on Katie
+# HydroBase.db_version:  design version: 20141201  last data change: 20150304
+# HydroBase table structure for software is at least 2013040420130404
+# HydroBase input name is "".
+# Stored procedures are being used.
+# -----------------------------------------------------------------------------
+#
+#------------------------------------------------
+#
+# StateMod time series
+# ********************
+#
+# Years Shown = Calendar Years
+# The period of record for each time series may vary
+# because of the original input and data processing steps.
+#
+#     TS ID                    Type   Source   Units  Period of Record    Location    Description
+#   1 9900528...MONTH          -      -        ACFT   Oct/1971 - Sep/2009 9900528     9900528
+#   2 9900539...MONTH          -      -        ACFT   Jan/1970 - Dec/2013 9900539     9900539
+#   3 9900540...MONTH          -      -        ACFT   Jan/1983 - Dec/2013 9900540     9900540
+#   4 WYD_001...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_001     WYD_001
+#   5 WYD_002...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_002     WYD_002
+#   6 WYD_003...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_003     WYD_003
+#   7 WYD_004...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_004     WYD_004
+#   8 WYD_005...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_005     WYD_005
+#   9 WYD_006...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_006     WYD_006
+#  10 WYD_007...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_007     WYD_007
+#  11 WYD_008...MONTH          -      -        ACFT   Oct/1908 - Sep/2002 WYD_008     WYD_008
+#  12 WYD_009...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_009     WYD_009
+#  13 WYD_010...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_010     WYD_010
+#  14 WYD_011...MONTH          -      -        ACFT   Oct/1970 - Sep/1998 WYD_011     WYD_011
+#
+#>EndHeader
+#
+# Steve Malers changes Google Drive references to local files
+# 9900528...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990528H.stm
+# 9900539...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990539.stm
+# 9900540...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\990540.stm
+# WYD_001...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_001his.stm
+# WYD_002...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_002his.stm
+# WYD_003...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_003his.stm
+# WYD_004...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_004his.stm
+# WYD_005...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_005his.stm
+# WYD_006...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_006his.stm
+# WYD_007...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_007his.stm
+# WYD_008...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_008his.stm
+# WYD_009...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_009his.stm
+# WYD_010...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_010his.stm
+# WYD_011...MONTH~StateMod~C:\Google Drive\CDSS\ym2015\Diversions\WYD_011his.stm
+# WriteStateMod(TSList=AllTS,OutputFile="C:\Google Drive\CDSS\ym2015\Diversions\WYD.stm",Precision=0)
+# smalers, note that dataset included file 9900528H.stm but command file referenced 990528H.stm
+# smalers, similar for other files...used the filenames with two zeros below to explicitly match
+9900528...MONTH~StateMod~9900528H.stm
+9900539...MONTH~StateMod~9900539.stm
+9900540...MONTH~StateMod~9900540.stm
+WYD_001...MONTH~StateMod~WYD_001his.stm
+WYD_002...MONTH~StateMod~WYD_002his.stm
+WYD_003...MONTH~StateMod~WYD_003his.stm
+WYD_004...MONTH~StateMod~WYD_004his.stm
+WYD_005...MONTH~StateMod~WYD_005his.stm
+WYD_006...MONTH~StateMod~WYD_006his.stm
+WYD_007...MONTH~StateMod~WYD_007his.stm
+WYD_008...MONTH~StateMod~WYD_008his.stm
+WYD_009...MONTH~StateMod~WYD_009his.stm
+WYD_010...MONTH~StateMod~WYD_010his.stm
+WYD_011...MONTH~StateMod~WYD_011his.stm
+WriteStateMod(TSList=AllTS,OutputFile="WYD.stm",Precision=0)

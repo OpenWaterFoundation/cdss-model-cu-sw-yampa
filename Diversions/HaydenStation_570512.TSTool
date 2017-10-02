@@ -1,0 +1,33 @@
+#
+# Correcting bad data from Hydrobase for Hayden Station
+# From conversation with Xcel (Lauren Nance 5/25/2016), bad gage readings from 2000 - 2009
+# The period 1984-1999 is representative of operations
+# Unit 1 came on-line in 1966 and Unit 2 in 1972
+# For recent period, combine infrequent diversion data with longer record
+#
+SetInputPeriod(InputStart="10/1985",InputEnd="10/1999")
+#
+# 5700512 - COLO UTILITIES D & PL
+5700512.DWR.DivTotal.Month~HydroBase
+NewStatisticTimeSeries(TSID="5700512.DWR.DivTotal.Month",Alias="RepAve",NewTSID="RepAve...Month",Statistic=Mean,OutputStart="10/1983",OutputEnd="10/2010")
+Free(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month")
+#
+SetInputPeriod(InputStart="10/1908",InputEnd="09/2013")
+#
+# 5700512 - COLO UTILITIES D & PL
+5700512.DWR.DivTotal.Month~HydroBase
+5700512.DWR.IDivTotal.Month~HydroBase
+#
+# Fill values from 10/1908 - 1966 with zero
+# set values from 2000 - 2010 with monthly averages
+# Fill missing DivTotal values from 2010 - 2013 with IDivTotal
+FillConstant(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month",ConstantValue=0,FillEnd="10/1966")
+FillFromTS(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month",IndependentTSList=AllMatchingTSID,IndependentTSID="RepAve",FillStart="10/1983",FillEnd="10/1985")
+SetFromTS(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month",IndependentTSList=AllMatchingTSID,IndependentTSID="RepAve",SetStart="10/1999",SetEnd="10/2010",TransferHow=ByDateTime)
+FillFromTS(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month",IndependentTSList=AllMatchingTSID,IndependentTSID="5700512.DWR.IDivTotal.Month")
+#
+# Write out to .stm
+SetOutputYearType(OutputYearType=Water)
+WriteStateMod(TSList=AllMatchingTSID,TSID="5700512.DWR.DivTotal.Month",OutputFile="5700512_Hist.stm",Precision=0)
+#
+#

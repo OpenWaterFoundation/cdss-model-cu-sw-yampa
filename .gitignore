@@ -49,7 +49,74 @@ StateCU/*.wsl
 
 ################## Start StateMod Files #######################
 # Ignore dynamic files written to StateMod folder
+# - some of the following could be made more general
 
+Diversions/58_SteamboatWells_B.stm
+Diversions/58_SteamboatWells_H.stm
+Diversions/5402068.stm
+Diversions/Future_Demands.stm
+Diversions/5700512_Hist.stm
+Diversions/M&I_Baseline.stm
+Diversions/WYD.stm
+
+Diversions/ym2015_dds.dds
+Diversions/ym2015_ddh.dds
+
+StateMod/*.rin
+StateMod/*.ddh
+StateMod/*.ddr
+StateMod/*.ddr
+StateMod/*.dds
+StateMod/*.ddm
+StateMod/*.eom
+StateMod/*.ifs
+StateMod/*.ifr
+StateMod/*.ifa
 StateMod/*.ipy
+StateMod/*.iwr
+StateMod/*.rer
+StateMod/*.rer
+StateMod/*.res
+StateMod/*.res
+StateMod/*.rih
+StateMod/*.ris
+StateMod/*.rib
+StateMod/*.tar
+StateMod/*.tar
+StateMod/*.tar
+
+# Ignore all StateMod binary and report output files
+# # - these files are created by StateMod
+#
+*.chk
+*.tmp
+fort.*
+*.b43
+*.b44
+*.b45
+*.b47
+*.b67
+*.b68
+*.xbe
+*.xbg
+*.xbi
+*.xbm
+*.xca
+*.xcb
+*.xcd
+*.xci
+*.xcw
+*.xdd
+*.xgn
+*.xir
+*.xop
+*.xou
+*.xpl
+*.xre
+*.xrh
+*.xri
+*.xss
+*.xtb
+*.xwr
 
 ################## End StateMod Files #######################

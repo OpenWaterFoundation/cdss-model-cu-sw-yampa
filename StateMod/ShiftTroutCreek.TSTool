@@ -1,0 +1,48 @@
+#
+# Lisa Wade @ Wilson Water Group
+#
+# TSTool command file to modify the natural inflow to the top of Trout and Fish Creek
+# These are ungaged baseflow nodes.
+# They are estimated as a percentage of the flow on Elk River, as measured at
+# USGS gage 09241000(Elk River at Clark). However, the elevation of Trout and Fish Creek
+# is significantly lower than Elk River. This causes the melt to come down earlier
+# in the year. Therefore, we are shifting 14% of the estimated flow from May to April.
+# This method was developed by Heather Thomspon at Ecological Resource Consultants
+# as part of her work for the proposed Peabody Energy Trout Creek Reservoir.
+#
+# Read in the ym2015x.xbm file.
+ReadStateMod(InputFile="ym2015x.xbm",Alias="%L")
+#
+# Copy the Trout and Fish Creek estimated inflows
+Copy(TSID="5701009",NewTSID="5701009...Month.Copy",Alias="%L-Copy")
+Copy(TSID="5700612",NewTSID="5700612...Month.Copy",Alias="%L-Copy")
+Copy(TSID="5700544",NewTSID="5700544...Month.Copy",Alias="%L-Copy")
+#
+# Find 14% of the May flow
+NewPatternTimeSeries(Alias="May14Percent",NewTSID="May14Percent...Month",SetStart="01/1908",SetEnd="12/2013",PatternValues="0,0,0,0,0.14,0,0,0,0,0,0,0")
+Multiply(TSID="5701009-Copy",MultiplierTSID="May14Percent",NewUnits="ACFT")
+Multiply(TSID="5700612-Copy",MultiplierTSID="May14Percent",NewUnits="ACFT")
+Multiply(TSID="5700544-Copy",MultiplierTSID="May14Percent",NewUnits="ACFT")
+#
+# Subtract 14% of the May flow from May
+Subtract(TSID="5701009",SubtractTSList=AllMatchingTSID,SubtractTSID="5701009-Copy",HandleMissingHow="IgnoreMissing")
+Subtract(TSID="5700612",SubtractTSList=AllMatchingTSID,SubtractTSID="5700612-Copy",HandleMissingHow="IgnoreMissing")
+Subtract(TSID="5700544",SubtractTSList=AllMatchingTSID,SubtractTSID="5700544-Copy",HandleMissingHow="IgnoreMissing")
+#
+# Add 14% of the May flow to April
+ShiftTimeByInterval(TSList=AllMatchingTSID,TSID="5701009-Copy",ShiftData="1,1")
+ShiftTimeByInterval(TSList=AllMatchingTSID,TSID="5700612-Copy",ShiftData="1,1")
+ShiftTimeByInterval(TSList=AllMatchingTSID,TSID="5700544-Copy",ShiftData="1,1")
+Add(TSID="5701009",AddTSList=AllMatchingTSID,AddTSID="5701009-Copy",HandleMissingHow="IgnoreMissing")
+Add(TSID="5700612",AddTSList=AllMatchingTSID,AddTSID="5700612-Copy",HandleMissingHow="IgnoreMissing")
+Add(TSID="5700544",AddTSList=AllMatchingTSID,AddTSID="5700544-Copy",HandleMissingHow="IgnoreMissing")
+#
+# Write out all time series
+Free(TSList=AllMatchingTSID,TSID="May14Percent")
+Free(TSList=AllMatchingTSID,TSID="5701009-Copy")
+Free(TSList=AllMatchingTSID,TSID="5700612-Copy")
+Free(TSList=AllMatchingTSID,TSID="5700544-Copy")
+#
+SetOutputYearType(OutputYearType=Water)
+WriteStateMod(TSList=AllTS,OutputFile="ym2015x_mod.xbm")
+#

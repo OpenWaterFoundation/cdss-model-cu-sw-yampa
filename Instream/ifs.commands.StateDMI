@@ -1,0 +1,43 @@
+#
+# Create the Yampa Instream Flow Stations file
+#
+#  Step 1 - read instream flow structures from network file, sort alphabetically.
+#
+ReadInstreamFlowStationsFromNetwork(InputFile="..\Network\ym2015.net")
+SortInstreamFlowStations(Order=Ascending)
+#
+#  Step 2 - create file and set daily flags
+#
+SetInstreamFlowStation(ID="*",DailyID="0",DemandType=2)
+#
+#  Step 3 - fill remaining instream flow information from HB and output file
+#
+FillInstreamFlowStationsFromHydroBase(ID="*")
+SetInstreamFlowStation(ID="5802591",DownstreamRiverNodeID="5802591",OnOff=1,IfNotFound=Warn)
+#
+# Step 4 - Set instream flow information that is not in Hydrobase.
+#
+# Set Morrison Creek ISF extent meh 8/2013
+SetInstreamFlowStation(ID="5803913_MF",Name="MorrisonCrkMSF",DownstreamRiverNodeID="5803913_MF",OnOff=1,DemandType=2,IfNotFound=Warn)
+#
+# LCW - setting up FERC minimum stream flow requirement below Stagecoach Reservoir
+# This is a modification of the method employed in previous models.
+# The FERC Environmental Flows state that:
+#     Aug - Nov: 40 cfs or inflow to Stagecoach (whichever is less) not to go below 20 cfs.
+#     Dec - July: 40 cfs or inflow, whichever is less.
+# The 5804213_F2 node has a right that is senior to the reservoir storage
+# and an operating rule that will release water from the reservoir to maintain a flow of 20 cfs from Aug to Nov
+# The 5804213_F4 node has a right that is senior to the reservoir storage,
+# but no operating rule. Therefore, the reservoir will by-pass up to 40 cfs.
+# When inflow is less than 40 cfs, the reservoir will by-pass the inflow, but will not release from storage.
+SetInstreamFlowStation(ID="5804213_F2",Name="STAGECOACHRES_FERC_20",DownstreamRiverNodeID="5804213_F2",OnOff=1,DemandType=2,IfNotFound=Warn)
+SetInstreamFlowStation(ID="5804213_F4",Name="STAGECOACHRES_FERC_40",DownstreamRiverNodeID="5804213_F4",OnOff=1,DemandType=2,IfNotFound=Warn)
+#
+# Set instream flow stations for Elkhead Reservoir operations
+#    Release water for Yampa PBO and Maybell PBO Fish Target flows
+SetInstreamFlowStation(ID="44_FishTar",Name="Maybell PBO Fish Target",UpstreamRiverNodeID="44_FishTar",DownstreamRiverNodeID="44_FishTar",OnOff=1,IfNotFound=Warn)
+SetInstreamFlowStation(ID="44_FishRch",Name="Yampa PBO Fish Target",UpstreamRiverNodeID="44_FishRch",DownstreamRiverNodeID="44_FishDwn",OnOff=1,IfNotFound=Warn)
+#
+# Step 5 - write out to StateMod
+#
+WriteInstreamFlowStationsToStateMod(OutputFile="..\StateMod\ym2015.ifs",WriteHow=OverwriteFile)
