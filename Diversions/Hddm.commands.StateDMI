@@ -1,0 +1,23 @@
+# Hddm.commands.StateDMI - Creates Yampa River Historical Demand file
+#
+#
+#  Step 1 - set the output period, used to compute averages...
+#
+SetOutputPeriod(OutputStart="10/1908",OutputEnd="9/2013")
+SetOutputYearType(OutputYearType=Water)
+#
+#  Step 2 - read historical diversion file -defined structures for *.ddm file
+#
+ReadDiversionHistoricalTSMonthlyFromStateMod(InputFile="..\StateMod\ym2015.ddh")
+#
+#  Step 3 - override specific demands with time series...
+#
+#  Step 4 - write the time series to the StateMod file...
+#
+WriteDiversionHistoricalTSMonthlyToStateMod(OutputFile="..\StateMod\ym2015H.ddm")
+
+
+
+
+
+
