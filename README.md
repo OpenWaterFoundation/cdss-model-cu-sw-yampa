@@ -152,7 +152,7 @@ CDSS is a program within the [Colorado Water Conservation Board (CWCB)](http://c
 The primary contact for CDSS is [Andy Moore](mailto:andy.moore@state.co.us).
 
 The Yampa dataset is maintained by [Wilson Water Group](http://www.wilsonwatergroup.com/)
-under contract with the State of Colorado and others.  Contact [Lisa Wade](mailto:lisa.wade@wilsonwatergroup.com) with questions.
+under contract with the State of Colorado and others.  Contact [Lisa Brown](mailto:lisa.brown@wilsonwatergroup.com) with questions.
 
 The Open Water Foundation has created this repository as a test of using GitHub for
 version control of a dataset and is coordinating with the CWCB and WWG to evaluate
